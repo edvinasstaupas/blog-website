@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="homestyle/homestyle.css">
+</head>
+<body>
+<div class="head">
+    <div class="logo"><img id="left-logo" src="logo.png" alt="logo"/></div>
+    <div class="header">Welcome to the blog</div>
+    <div class="login">
+        <button id="login" class="btn btn-primary btn-user">
+            Log in
+        </button>
+        <button id="register" class="btn btn-primary btn-user">
+            Register
+        </button>
+        <form method="POST" th:object="${entrySearch}" id="searchForm">
+            <input type="text" id="keyword" placeholder="Enter keyword" th:field="*{keyword}">
+            <button type="submit" id="search" class="btn btn-primary btn-user">
+                Search
+            </button>
+        </form>
+    </div>
+</div>
+<div class="mainContainer">
+    <div class="right-side banner">banner</div>
+    <div class="main">
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+            aut,
+            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+            pariatur.
+        </div>
+    </div>
+    <div class="left-side banner">banner</div>
+</div>
+
+<script>
+    document.getElementById("login").onclick = function () {
+        /*
+                location.href = "/login";
+        */
+    }
+    document.getElementById("register").onclick = function () {
+        /*
+        location.href = "/register";
+        */
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+body {
+    background-color: lightskyblue;
+    margin: 5px 20px;
+}
+
+.head {
+    display: flex;
+    flex-flow: row wrap;
+    overflow-wrap: anywhere;
+    align-items: center;
+    justify-content: center;
+}
+
+/*
+body {
+    width: 100vw;
+    display: grid;
+    grid-template-areas: "logotype head login"
+    "ls main rs";
+    grid-template-columns: 15% 70% 15%;
+    grid-gap: 6px;
+    overflow-wrap: anywhere;
+    background-color: lightskyblue;
+}
+*/
+
+.header {
+    justify-self: center;
+    font-size: 4vh;
+    align-self: center;
+    text-align: center;
+    flex-grow: 10;
+}
+
+.login {
+    justify-self: flex-end;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.login *{
+    margin: 4px;
+}
+
+#searchForm {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+
+.logo {
+    justify-self: flex-start;
+}
+
+#left-logo {
+    width: 100%;
+    height: auto;
+}
+
+.mainContainer {
+    display: grid;
+    grid-template-areas: "left m right";
+    grid-template-columns: 15% 70% 15%;
+    grid-template-rows: 1fr;
+    grid-gap: 6px;
+}
+
+.main {
+    grid-area: m;
+    display: flex;
+    flex-flow: column wrap;
+    overflow-wrap: anywhere;
+    background-color: lightskyblue;
+}
+
+.text-main {
+    grid-column: 2;
+    background-color: beige;
+    margin: 6px 0;
+}
+
+.left-side {
+    grid-area: left;
+}
+
+.right-side {
+    grid-area: right;}
+
+.banner {
+    height: inherit;
+}
+
+.left-side.banner {
+    background-color: red;
+}
+
+.right-side.banner {
+    background-color: yellow;
+}
