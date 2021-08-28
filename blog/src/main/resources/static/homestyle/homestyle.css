@@ -1,14 +1,16 @@
 body {
-    background-color: lightskyblue;
+    background-color: rgba(224, 247, 255, 1);
     margin: 5px 20px;
 }
 
 .head {
-    display: flex;
     flex-flow: row wrap;
     overflow-wrap: anywhere;
     align-items: center;
-    justify-content: center;
+}
+
+.head > * {
+    margin: 5px 0;
 }
 
 /*
@@ -25,10 +27,9 @@ body {
 */
 
 .header {
-    justify-self: center;
+    margin: 0 10px;
     font-size: 4vh;
     align-self: center;
-    text-align: center;
     flex-grow: 10;
 }
 
@@ -40,8 +41,8 @@ body {
     align-items: center;
 }
 
-.login *{
-    margin: 4px;
+.login > *{
+    margin: 2px 4px;
 }
 
 #searchForm {
