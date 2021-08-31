@@ -1,30 +1,29 @@
 package lt.staupasedvinas.blog.model;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.util.List;
 
-@SuperBuilder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="users")
-public class User {
+public class Entry {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String username;
+    private String title;
 
-    private String email;
-
-    private String password;
+    private String text;
 /*
-    @OneToMany(mappedBy = "author")
-    private List<Entry> entries;*/
+    @ManyToOne
+    @JoinColumn(name = "author_id",
+            foreignKey = @ForeignKey(name = "user_entry_author_fkey")
+    )
+    private User author;*/
 }

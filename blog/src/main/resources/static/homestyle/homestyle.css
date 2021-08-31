@@ -13,19 +13,6 @@ body {
     margin: 5px 0;
 }
 
-/*
-body {
-    width: 100vw;
-    display: grid;
-    grid-template-areas: "logotype head login"
-    "ls main rs";
-    grid-template-columns: 15% 70% 15%;
-    grid-gap: 6px;
-    overflow-wrap: anywhere;
-    background-color: lightskyblue;
-}
-*/
-
 .header {
     margin: 0 10px;
     font-size: 4vh;
@@ -37,11 +24,11 @@ body {
     justify-self: flex-end;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
-.login > *{
+.login > * {
     margin: 2px 4px;
 }
 
@@ -88,7 +75,8 @@ body {
 }
 
 .right-side {
-    grid-area: right;}
+    grid-area: right;
+}
 
 .banner {
     height: inherit;
