@@ -20,7 +20,7 @@ public class RegisterController {
     private final EntryRepository entryRepository;
 
     @GetMapping("/register")
-    public String redirectExample(Model model) {
+    public String registerView(Model model) {
         model.addAttribute("register", new User());
         return "register";
     }

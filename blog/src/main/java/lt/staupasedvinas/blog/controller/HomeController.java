@@ -18,18 +18,12 @@ public class HomeController {
 
     @GetMapping
     public String getHomeView(Model model, User modelUser) {
-        UserType userType = new UserType();
-        userType.setName("admin");
-        modelUser.setUserType(userType);
         user = modelUser;
         System.out.println(user);
-        System.out.println(user.getUserType().toString());
 
         model.addAttribute("entrySearch", new EntrySearch());
         model.addAttribute("user", user);
-        /*//TODO remove
-        System.out.println("a");
-        System.out.println(entryService.findByIdAndText());*/
+
         return "home/home";
     }
 

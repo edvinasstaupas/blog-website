@@ -28,14 +28,14 @@ public class LogInController {
     @PostMapping
     public String logIn(Model model, User user) {
         User dbUser = userRepository.getByEmail(user.getEmail());
-        if (dbUser.getPassword().equals(user.getPassword()) || dbUser != null) {
+        if (dbUser == null || !dbUser.getPassword().equals(user.getPassword())) {
+            model.addAttribute("logIn", user);
+            model.addAttribute("message", "Bad password or no user with this email.");
+            return "login";
+        } else {
             model.addAttribute("user", user);
             model.addAttribute("entrySearch", new EntrySearch());
             return "home/home";
-        } else {
-            model.addAttribute("user", user);
-            model.addAttribute("message", "Bad password or no user with this email.");
-            return "login";
         }
     }
 }
