@@ -11,22 +11,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/login")
+@RequestMapping("/register")
 @RequiredArgsConstructor
-public class LogInController {
+public class RegisterController {
 
     private final UserRepository userRepository;
     private final EntryRepository entryRepository;
 
     @GetMapping
-    public String getLogInView(Model model) {
-        model.addAttribute("logIn", new User());
-        return "login";
+    public String getRegisterView(Model model) {
+        model.addAttribute("register", new User());
+        return "register";
     }
 
     @PostMapping
-    public String logIn(Model model, User user) {
+    public String register(Model model, User user) {
         userRepository.save(user);
+
         model.addAttribute("entrySearch", new EntrySearch());
         return "home/home";
     }

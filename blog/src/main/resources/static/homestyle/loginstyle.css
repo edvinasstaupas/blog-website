@@ -6,7 +6,7 @@ body {
     align-items: center;
 }
 
-#email, #password{
+#email, #password, #username {
     display: flex;
     flex-direction: row;
     align-items: center;

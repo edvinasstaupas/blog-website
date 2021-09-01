@@ -10,14 +10,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-<!--<img src="avatar.png" alt="avatar">
-<form method="POST" th:object="${user}" id="loginForm">
-    <input class="form-control" type="text" id="username" placeholder="Username" th:field="*{username}">
-    <input class="form-control" type="password" id="password" placeholder="Password" th:field="*{password}">
-    <button class="btn btn-primary" type="submit" id="button">Log in</button>
-</form>-->
 <form class="p-4 p-md-5 border rounded-3 bg-light" method="POST" th:object="${logIn}">
-    <div class="mb-3 form-floating" id="email">
+   <!-- <div class="mb-3 form-floating" id="email">
         <i class="fas fa-user"></i>
         <div class="form-floating ml-2 w-100">
             <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
@@ -33,14 +27,20 @@
             <label for="floatingPassword">Password</label>
         </div>
     </div>
-    <div class="checkbox mb-3">
+    &lt;!&ndash;<div class="checkbox mb-3">
         <label>
             <input type="checkbox" class="ml-1" value="remember-me" th:field="*{rememberMe}"> Remember me
         </label>
-    </div>
+    </div>&ndash;&gt;
     <button class="w-100 btn btn-lg btn-primary" type="submit">Log in</button>
     <hr class="my-4">
-    <small class="text-muted">By clicking Log in, you agree to the terms of use.</small>
+    <small class="text-muted">By clicking Log in, you agree to the terms of use.</small>-->
+    <div th:insert="fragments/login-register-fragments :: email('log')"></div>
+    <div th:replace="fragments/login-register-fragments :: password"></div>
+    <!--
+        <div th:replace="fragments/login-register-fragments :: rememberMe"></div>
+    -->
+    <div th:replace="fragments/login-register-fragments :: bottomForm"></div>
 </form>
 </body>
 </html>

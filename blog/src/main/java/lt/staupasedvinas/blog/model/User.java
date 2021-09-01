@@ -24,7 +24,12 @@ public class User {
     private String email;
 
     private String password;
-/*
+
+    @ManyToOne
+    @JoinColumn(name = "user_type_id",
+    foreignKey = @ForeignKey(name = "user_user_type_fkey"))
+    private UserType usertype;
+
     @OneToMany(mappedBy = "author")
-    private List<Entry> entries;*/
+    private List<Entry> entries;
 }

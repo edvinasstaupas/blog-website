@@ -2,11 +2,13 @@ package lt.staupasedvinas.blog.model;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+@Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,10 +22,10 @@ public class Entry {
     private String title;
 
     private String text;
-/*
+
     @ManyToOne
     @JoinColumn(name = "author_id",
             foreignKey = @ForeignKey(name = "user_entry_author_fkey")
     )
-    private User author;*/
+    private User author;
 }
