@@ -1,16 +1,32 @@
-CREATE TABLE USERS
+create table users
 (
-    id       bigint auto_increment primary key,
-    username varchar(255) not null,
-    email varchar(255) not null,
-    password varchar(255) not null
+    id           bigint not null
+        constraint users_pkey
+            primary key,
+    email        varchar(255) unique,
+    password     varchar(255),
+    username     varchar(255),
+    user_type_id bigint
+        constraint user_user_type_fkey
+            references user_type
 );
 
-CREATE TABLE ENTRY
+create table entry
 (
-    id        bigint auto_increment primary key,
-    title     varchar(255) not null,
-    text      varchar(255) not null/*,
-    author_id bigint,
-    foreign key (author_id) references users(id)*/
+    id        bigint not null
+        constraint entry_pkey
+            primary key,
+    text      text,
+    title     varchar(255),
+    author_id bigint
+        constraint user_entry_author_fkey
+            references users
+);
+
+create table user_type
+(
+    id   bigint not null
+        constraint user_type_pkey
+            primary key,
+    name varchar(255)
 );

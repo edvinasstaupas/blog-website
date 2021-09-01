@@ -21,6 +21,7 @@ public class Entry {
 
     private String title;
 
+    @Column(columnDefinition="TEXT")
     private String text;
 
     @ManyToOne

@@ -1,34 +1,34 @@
-<div th:fragment="username(logreg)">
+<div th:fragment="logRegButtons">
+    <button id="login" class="btn btn-dark btn-user">
+        Log in
+    </button>
+    <button id="register" class="btn btn-dark btn-user">
+        Register
+    </button>
+</div>
+
+<div th:fragment="usernameInput(logreg)">
     <!--TODO remove style-->
-    <div class="mb-3 form-floating" id="username" style="display: flex;flex-direction: row;align-items: center;">
-        <i class="fas fa-user"></i>
-        <div class="form-floating ml-2 w-100">
-            <input type="text" class="form-control" id="floatingUsername" placeholder="name"
-                   th:field="*{username}" required th:autofocus="${logreg=='reg'} ? 'true'">
-            <label for="floatingUsername">Username</label>
-        </div>
+    <div class="mb-3 form-floating w-100" id="username" style="display: flex;flex-direction: row;align-items: center;">
+        <input type="text" class="form-control" id="floatingUsername" placeholder="name"
+               th:field="*{username}" required th:autofocus="${logreg=='reg'} ? 'true'">
+        <label for="floatingUsername">Username</label>
     </div>
 </div>
 
 <div th:fragment="email(logreg)">
-    <div class="mb-3 form-floating" id="email">
-        <i class="fas fa-envelope"></i>
-        <div class="form-floating ml-2 w-100">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"
-                   th:field="*{email}" required th:autofocus="${logreg=='log'} ? 'true'">
-            <label for="floatingInput">Email address</label>
-        </div>
+    <div class="mb-3 form-floating w-100" id="email">
+        <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
+               th:field="*{email}" required th:autofocus="${logreg=='log'} ? 'true'">
+        <label for="floatingEmail">Email address</label>
     </div>
 </div>
 
 <div th:fragment="password">
-    <div class="mb-3" id="password">
-        <i class="fas fa-key"></i>
-        <div class="form-floating ml-2 w-100">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
-                   th:field="*{password}" required>
-            <label for="floatingPassword">Password</label>
-        </div>
+    <div class="form-floating mb-3 w-100" id="password">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+               th:field="*{password}" required>
+        <label for="floatingPassword">Password</label>
     </div>
 </div>
 
@@ -41,7 +41,8 @@
 </div>
 
 <div th:fragment="bottomForm">
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+    <small th:if="${message != null}" class="text-muted" th:text="${message}"></small>
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
     <hr class="my-4">
     <small class="text-muted">By clicking submit, you agree to the terms of use.</small>
 </div>

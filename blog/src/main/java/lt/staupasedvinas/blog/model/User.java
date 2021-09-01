@@ -21,6 +21,7 @@ public class User {
 
     private String username;
 
+    @Column(unique = true)
     private String email;
 
     private String password;
@@ -28,7 +29,7 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "user_type_id",
     foreignKey = @ForeignKey(name = "user_user_type_fkey"))
-    private UserType usertype;
+    private UserType userType;
 
     @OneToMany(mappedBy = "author")
     private List<Entry> entries;

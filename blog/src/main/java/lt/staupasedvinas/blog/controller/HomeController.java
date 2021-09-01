@@ -2,6 +2,7 @@ package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.model.User;
+import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.service.EntryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,15 +12,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
+    private User user;
+
     private final EntryService entryService;
 
     @GetMapping
-    public String getHomeView(Model model) {
+    public String getHomeView(Model model, User modelUser) {
+        UserType userType = new UserType();
+        userType.setName("admin");
+        modelUser.setUserType(userType);
+        user = modelUser;
+        System.out.println(user);
+        System.out.println(user.getUserType().toString());
+
         model.addAttribute("entrySearch", new EntrySearch());
-        model.addAttribute("logIn", new User());
-        //TODO remove
+        model.addAttribute("user", user);
+        /*//TODO remove
         System.out.println("a");
-        System.out.println(entryService.findByIdAndText());
+        System.out.println(entryService.findByIdAndText());*/
         return "home/home";
     }
 

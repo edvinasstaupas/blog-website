@@ -2,6 +2,7 @@ package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.model.User;
+import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.repository.EntryRepository;
 import lt.staupasedvinas.blog.repository.UserRepository;
 import org.springframework.stereotype.Controller;
@@ -26,8 +27,15 @@ public class LogInController {
 
     @PostMapping
     public String logIn(Model model, User user) {
-        userRepository.save(user);
-        model.addAttribute("entrySearch", new EntrySearch());
-        return "home/home";
+        User dbUser = userRepository.getByEmail(user.getEmail());
+        if (dbUser.getPassword().equals(user.getPassword()) || dbUser != null) {
+            model.addAttribute("user", user);
+            model.addAttribute("entrySearch", new EntrySearch());
+            return "home/home";
+        } else {
+            model.addAttribute("user", user);
+            model.addAttribute("message", "Bad password or no user with this email.");
+            return "login";
+        }
     }
 }

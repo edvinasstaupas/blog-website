@@ -10,82 +10,65 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-<div class="head d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <div class="logo">
-        <img id="left-logo" src="logo.png" alt="logo"/>
+<div class="page">
+    <div class="head d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <div class="logo">
+            <img id="left-logo" src="logo.png" alt="logo"/>
+        </div>
+        <div class="header">Welcome to the blog</div>
+        <div class="headerRight">
+            <div th:if="${user.id == null}" th:insert="fragments/login-register-fragments :: logRegButtons"></div>
+            <div th:if="${user.id != null && user.userType.name == 'admin'}" th:insert="fragments/home-fragments :: adminPanelButton"></div>
+            <div th:insert="fragments/home-fragments :: search"></div>
+        </div>
     </div>
-    <div class="header">Welcome to the blog</div>
-    <div class="login">
-        <button id="login" class="btn btn-primary btn-user">
-            Log in
-        </button>
-        <button id="register" class="btn btn-primary btn-user">
-            Register
-        </button>
-        <form method="POST" th:object="${entrySearch}" id="searchForm">
-            <div class="input-group">
-                <div class="form-outline">
-                    <input type="search" id="form1" class="form-control" placeholder="Enter keyword"
-                           th:field="*{keyword}"/>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-search"></i>
-                </button>
+    <div class="mainContainer">
+        <div class="right-side banner">banner</div>
+        <div class="main">
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
             </div>
-            <!--<input type="text" id="keyword" class="form-control" placeholder="Enter keyword" th:field="*{keyword}">
-            <button type="submit" id="search" class="btn btn-primary btn-user">
-                Search
-            </button>-->
-        </form>
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
+            </div>
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
+            </div>
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
+            </div>
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
+            </div>
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
+            </div>
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
+            </div>
+            <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
+                aut,
+                commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
+                pariatur.
+            </div>
+        </div>
+        <div class="left-side banner">banner</div>
     </div>
 </div>
-<div class="mainContainer">
-    <div class="right-side banner">banner</div>
-    <div class="main">
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-        <div class="text-main">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aliquid amet, aperiam at,
-            aut,
-            commodi cumque dignissimos et ex ipsa ipsum iste labore molestias qui ratione suscipit totam! Ipsum,
-            pariatur.
-        </div>
-    </div>
-    <div class="left-side banner">banner</div>
-</div>
-
 <script>
     document.getElementById("login").onclick = function () {
         location.href = "/login";
