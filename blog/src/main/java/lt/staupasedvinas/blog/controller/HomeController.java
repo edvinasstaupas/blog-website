@@ -1,8 +1,8 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.staupasedvinas.blog.model.EntrySearch;
 import lt.staupasedvinas.blog.model.User;
-import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.service.EntryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

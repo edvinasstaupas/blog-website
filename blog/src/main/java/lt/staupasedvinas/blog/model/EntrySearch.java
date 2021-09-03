@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.controller;
+package lt.staupasedvinas.blog.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
