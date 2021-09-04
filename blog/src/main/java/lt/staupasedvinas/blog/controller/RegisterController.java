@@ -6,19 +6,22 @@ import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.repository.EntryRepository;
 import lt.staupasedvinas.blog.repository.UserRepository;
+import lt.staupasedvinas.blog.service.MessageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping()
 @RequiredArgsConstructor
 public class RegisterController {
 
     private final UserRepository userRepository;
     private final EntryRepository entryRepository;
+    private final MessageService messageService;
 
     @GetMapping("/register")
     public String registerView(Model model) {
@@ -27,21 +30,21 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String redirect(Model model, User user) {
-        return "redirect:/registerRedirect";
+    public String forward(Model model, User user) {
+        return "forward:/registerForward";
     }
 
-    @GetMapping("/registerRedirect")
-    public String registerRedirect(Model model, User user) {
+    @PostMapping("/registerForward")
+    public String registerForward(Model model, User user, HttpServletRequest httpServletRequest) {
         User dbUser = userRepository.getByEmail(user.getEmail());
         if (dbUser == null) {
             user.setUserType(new UserType(1L, "member"));
             userRepository.save(user);
-            model.addAttribute("entrySearch", new EntrySearch());
-            return "home/home";
+            httpServletRequest.getSession().setAttribute("user", user);
+            return "redirect:";
         } else {
-            model.addAttribute("message", "There already is a user with this email, please log in");
-            model.addAttribute("register", new User());
+            model.addAttribute("message", messageService.getMessage("user.with.email.exists"));
+            model.addAttribute("register", user);
             return "register";
         }
     }

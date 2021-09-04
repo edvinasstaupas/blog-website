@@ -1,3 +1,19 @@
+<div th:fragment="pageHead(language)">
+    <div class="head d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <div class="logo">
+            <img id="left-logo" src="logo.png" alt="logo"/>
+        </div>
+        <div class="header">Welcome to the blog</div>
+        <div th:replace="fragments/home-fragments :: langButtons"></div>
+        <div class="headerRight">
+            <div th:if="${user.id == null}" th:replace="fragments/login-register-fragments :: logRegButtons"></div>
+            <div th:if="${user.id != null && user.userType.name == 'admin'}"
+                 th:replace="fragments/home-fragments :: adminPanelButton"></div>
+            <div th:replace="fragments/home-fragments :: search"></div>
+        </div>
+    </div>
+</div>
+
 <div th:fragment="search">
     <form method="POST" th:object="${entrySearch}" id="searchForm">
         <div class="input-group">
@@ -11,6 +27,16 @@
         </div>
     </form>
 </div>
+
 <div th:fragment="adminPanelButton">
-    <button type="button" value="Admin panel" class="btn btn-dark" onclick="location.href = '/admin-panel'"></button>
+    <button type="button" value="Admin panel" class="btn btn-dark" onclick="location.href = '/admin-panel'">Admin
+        panel
+    </button>
+</div>
+
+<div th:fragment="langButtons">
+    <div>
+        <button class="btn" th:classappend="${language == 'lt' ? 'btn-outline-dark' : 'btn-outline-secondary'}">LT</button>
+        <button class="btn" th:classappend="${language == 'en' ? 'btn-outline-dark' : 'btn-outline-secondary'}">EN</button>
+    </div>
 </div>

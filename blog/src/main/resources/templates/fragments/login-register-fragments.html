@@ -9,10 +9,10 @@
 
 <div th:fragment="usernameInput(logreg)">
     <!--TODO remove style-->
-    <div class="mb-3 form-floating w-100" id="username" style="display: flex;flex-direction: row;align-items: center;">
+    <div class="mb-3 form-floating w-100" id="username">
         <input type="text" class="form-control" id="floatingUsername" placeholder="name"
                th:field="*{username}" required th:autofocus="${logreg=='reg'} ? 'true'">
-        <label for="floatingUsername">Username</label>
+        <label for="floatingUsername" th:text="#{login.username}"></label>
     </div>
 </div>
 
@@ -20,7 +20,7 @@
     <div class="mb-3 form-floating w-100" id="email">
         <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
                th:field="*{email}" required th:autofocus="${logreg=='log'} ? 'true'">
-        <label for="floatingEmail">Email address</label>
+        <label for="floatingEmail" th:text="#{login.email}"></label>
     </div>
 </div>
 
@@ -28,21 +28,25 @@
     <div class="form-floating mb-3 w-100" id="password">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
                th:field="*{password}" required>
-        <label for="floatingPassword">Password</label>
+        <label for="floatingPassword" th:text="#{login.password}"></label>
     </div>
 </div>
 
 <div th:fragment="rememberMe">
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" class="ml-1" value="remember-me" th:field="*{rememberMe}"> Remember me
+            <input type="checkbox" class="ml-1" value="remember-me" th:field="*{rememberMe}" th:text="#{login.rememberMe}">
         </label>
     </div>
 </div>
 
 <div th:fragment="bottomForm">
-    <small th:if="${message != null}" class="text-muted mb-3" th:text="${message}"></small>
+    <div th:if="${message != null}" th:replace="fragments/login-register-fragments :: message"></div>
     <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
     <hr class="my-4">
-    <small class="text-muted">By clicking submit, you agree to the terms of use.</small>
+    <small class="text-muted" th:text="#{login.bottomText}"></small>
+</div>
+
+<div th:fragment="message">
+    <small class="text-muted mb-3" th:text="${message}"></small>
 </div>

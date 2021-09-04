@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuperBuilder
@@ -31,6 +32,6 @@ public class User {
     foreignKey = @ForeignKey(name = "user_user_type_fkey"))
     private UserType userType;
 
-    @OneToMany(mappedBy = "author")
-    private List<Entry> entries;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    private List<Entry> entries = new ArrayList<>();
 }
