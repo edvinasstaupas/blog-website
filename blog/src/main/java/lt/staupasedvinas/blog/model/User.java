@@ -32,9 +32,9 @@ public class User {
     private UserType userType;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
-    private List<Entry> entries = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
-    public void addEntry(Entry entry) {
-        entries.add(entry);
+    public void addPost(Post post) {
+        posts.add(post);
     }
 }

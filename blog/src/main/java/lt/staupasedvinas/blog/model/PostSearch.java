@@ -7,6 +7,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class EntrySearch {
+public class PostSearch {
     private String keyword;
 }

@@ -3,7 +3,7 @@ package lt.staupasedvinas.blog.controller;
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.model.UserType;
-import lt.staupasedvinas.blog.repository.EntryRepository;
+import lt.staupasedvinas.blog.repository.PostRepository;
 import lt.staupasedvinas.blog.repository.UserRepository;
 import lt.staupasedvinas.blog.service.MessageService;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RegisterController {
 
     private final UserRepository userRepository;
-    private final EntryRepository entryRepository;
+    private final PostRepository postRepository;
     private final MessageService messageService;
 
     @GetMapping("/register")

@@ -1,9 +1,9 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.model.EntrySearch;
+import lt.staupasedvinas.blog.model.PostSearch;
 import lt.staupasedvinas.blog.model.User;
-import lt.staupasedvinas.blog.service.EntryService;
+import lt.staupasedvinas.blog.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class HomeController {
 
     private final LocaleResolver localeResolver;
 
-    private final EntryService entryService;
+    private final PostService postService;
 
     @GetMapping
     public String getHomeView(Model model, HttpServletRequest httpServletRequest) {
@@ -33,7 +33,7 @@ public class HomeController {
         }
         System.out.println(user);
 
-        model.addAttribute("entrySearch", new EntrySearch());
+        model.addAttribute("postSearch", new PostSearch());
         model.addAttribute("loggedUser", user);
         model.addAttribute("lang", localeResolver.resolveLocale(httpServletRequest).getLanguage());
         System.out.println(localeResolver.resolveLocale(httpServletRequest).getLanguage());
@@ -41,7 +41,7 @@ public class HomeController {
     }
 
     @PostMapping
-    public String searchForEntry(Model model, EntrySearch entrySearch) {
-        return "entry/entry";
+    public String searchForPost(Model model, PostSearch postSearch) {
+        return "post";
     }
 }

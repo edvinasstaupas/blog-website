@@ -11,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Entry {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class Entry {
 
     @ManyToOne
     @JoinColumn(name = "author_id",
-            foreignKey = @ForeignKey(name = "user_entry_author_fkey")
+            foreignKey = @ForeignKey(name = "user_post_author_fkey")
     )
     private User author;
 }

@@ -3,7 +3,9 @@ create table users
     id           bigint not null
         constraint users_pkey
             primary key,
-    email        varchar(255) unique,
+    email        varchar(255)
+        constraint uk_6dotkott2kjsp8vw4d0m25fb7
+            unique,
     password     varchar(255),
     username     varchar(255),
     user_type_id bigint
@@ -11,15 +13,15 @@ create table users
             references user_type
 );
 
-create table entry
+create table post
 (
     id        bigint not null
-        constraint entry_pkey
+        constraint post_pkey
             primary key,
     text      text,
     title     varchar(255),
     author_id bigint
-        constraint user_entry_author_fkey
+        constraint user_post_author_fkey
             references users
 );
 
