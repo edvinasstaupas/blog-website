@@ -1,7 +1,6 @@
 package lt.staupasedvinas.blog.model;
 
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -10,6 +9,7 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -37,5 +37,4 @@ public class User {
     public void addEntry(Entry entry) {
         entries.add(entry);
     }
-
 }

@@ -36,7 +36,6 @@ public class LogInController {
     @PostMapping("/loginForward")
     public String loginForward(Model model, User user, HttpServletRequest httpServletRequest) {
         User dbUser = userRepository.getByEmail(user.getEmail());
-        log.info("test");
         if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
             httpServletRequest.getSession().setAttribute("user", dbUser);
             return "redirect:";

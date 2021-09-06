@@ -1,6 +1,8 @@
 <div th:fragment="logRegButtons">
-    <button id="login" class="btn btn-dark btn-user" th:text="#{home.login}"></button>
-    <button id="register" class="btn btn-dark btn-user" th:text="#{home.register}"></button>
+    <button id="login" class="btn btn-dark btn-user" th:text="#{home.login}"
+            onclick="location.href = '/login'"></button>
+    <button id="register" class="btn btn-dark btn-user" th:text="#{home.register}"
+            onclick="location.href = '/register'"></button>
 </div>
 
 <div th:fragment="usernameInput(logreg)">
