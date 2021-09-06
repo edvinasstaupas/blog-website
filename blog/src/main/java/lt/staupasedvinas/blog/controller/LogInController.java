@@ -1,6 +1,7 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.repository.EntryRepository;
 import lt.staupasedvinas.blog.repository.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class LogInController {
@@ -34,6 +36,7 @@ public class LogInController {
     @PostMapping("/loginForward")
     public String loginForward(Model model, User user, HttpServletRequest httpServletRequest) {
         User dbUser = userRepository.getByEmail(user.getEmail());
+        log.info("test");
         if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
             httpServletRequest.getSession().setAttribute("user", dbUser);
             return "redirect:";
