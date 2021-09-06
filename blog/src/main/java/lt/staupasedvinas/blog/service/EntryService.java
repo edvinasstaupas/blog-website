@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 public class EntryService {
     private final EntryRepository entryRepository;
 
-    public Entry findByIdAndText() {
-        return entryRepository.findByIdAndText(1L, "text");
+    public void createEntry(Entry entry) {
+        entryRepository.save(entry);
+        entry.getAuthor().addEntry(entry);
     }
 }

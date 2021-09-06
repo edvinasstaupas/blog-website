@@ -1,15 +1,12 @@
 <div th:fragment="logRegButtons">
-    <button id="login" class="btn btn-dark btn-user">
-        Log in
-    </button>
-    <button id="register" class="btn btn-dark btn-user">
-        Register
-    </button>
+    <button id="login" class="btn btn-dark btn-user" th:text="#{home.login}"></button>
+    <button id="register" class="btn btn-dark btn-user" th:text="#{home.register}"></button>
 </div>
 
 <div th:fragment="usernameInput(logreg)">
     <!--TODO remove style-->
     <div class="mb-3 form-floating w-100" id="username">
+        <!--TODO change placeholder to message-->
         <input type="text" class="form-control" id="floatingUsername" placeholder="name"
                th:field="*{username}" required th:autofocus="${logreg=='reg'} ? 'true'">
         <label for="floatingUsername" th:text="#{login.username}"></label>
@@ -18,6 +15,7 @@
 
 <div th:fragment="email(logreg)">
     <div class="mb-3 form-floating w-100" id="email">
+        <!--TODO change placeholder to message-->
         <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
                th:field="*{email}" required th:autofocus="${logreg=='log'} ? 'true'">
         <label for="floatingEmail" th:text="#{login.email}"></label>
@@ -25,6 +23,7 @@
 </div>
 
 <div th:fragment="password">
+    <!--TODO change placeholder to message-->
     <div class="form-floating mb-3 w-100" id="password">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
                th:field="*{password}" required>
@@ -35,18 +34,19 @@
 <div th:fragment="rememberMe">
     <div class="checkbox mb-3">
         <label>
-            <input type="checkbox" class="ml-1" value="remember-me" th:field="*{rememberMe}" th:text="#{login.rememberMe}">
+            <input type="checkbox" class="ml-1" value="remember-me" th:field="*{rememberMe}"
+                   th:text="#{login.rememberMe}">
         </label>
     </div>
 </div>
 
-<div th:fragment="bottomForm">
-    <div th:if="${message != null}" th:replace="fragments/login-register-fragments :: message"></div>
+<div th:fragment="bottomForm(message)">
+    <div th:replace="fragments/login-register-fragments :: errorMessage(msg=${message})"></div>
     <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
     <hr class="my-4">
-    <small class="text-muted" th:text="#{login.bottomText}"></small>
+    <small class="btn text-muted" th:text="#{login.bottomText}"></small>
 </div>
 
-<div th:fragment="message">
-    <small class="text-muted mb-3" th:text="${message}"></small>
+<div th:fragment="errorMessage(msg)">
+    <small class="btn text-muted" th:text="${msg}"></small>
 </div>

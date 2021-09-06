@@ -1,7 +1,6 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.model.EntrySearch;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.repository.EntryRepository;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,7 +24,7 @@ public class RegisterController {
     @GetMapping("/register")
     public String registerView(Model model) {
         model.addAttribute("register", new User());
-        return "register";
+        return "log-reg/register";
     }
 
     @PostMapping("/register")
@@ -43,9 +41,9 @@ public class RegisterController {
             httpServletRequest.getSession().setAttribute("user", user);
             return "redirect:";
         } else {
-            model.addAttribute("message", messageService.getMessage("user.with.email.exists"));
+            model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
             model.addAttribute("register", user);
-            return "register";
+            return "log-reg/register";
         }
     }
 }

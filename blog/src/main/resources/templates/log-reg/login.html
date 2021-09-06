@@ -13,7 +13,7 @@
 <form class="p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${logIn}">
     <div th:replace="fragments/login-register-fragments :: email('log')"></div>
     <div th:replace="fragments/login-register-fragments :: password"></div>
-    <div th:replace="fragments/login-register-fragments :: bottomForm"></div>
+    <div th:replace="fragments/login-register-fragments :: bottomForm(message=${msg})"></div>
 </form>
 </body>
 </html>

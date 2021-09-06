@@ -34,4 +34,9 @@ public class User {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Entry> entries = new ArrayList<>();
+
+    public void addEntry(Entry entry) {
+        entries.add(entry);
+    }
+
 }
