@@ -5,20 +5,20 @@
             onclick="location.href = '/register'"></button>
 </div>
 
-<div th:fragment="usernameInput(logreg)">
+<div th:fragment="usernameInput">
     <div class="mb-3 form-floating w-100" id="username">
         <!--TODO change placeholder to message-->
         <input type="text" class="form-control" id="floatingUsername" placeholder="name"
-               th:field="*{username}" required th:autofocus="${logreg=='reg'} ? 'true'">
+               th:field="*{username}" required >
         <label for="floatingUsername" th:text="#{login.username}"></label>
     </div>
 </div>
 
-<div th:fragment="email(logreg)">
+<div th:fragment="email">
     <div class="mb-3 form-floating w-100" id="email">
         <!--TODO change placeholder to message-->
         <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
-               th:field="*{email}" required th:autofocus="${logreg=='log'} ? 'true'">
+               th:field="*{email}" required autofocus>
         <label for="floatingEmail" th:text="#{login.email}"></label>
     </div>
 </div>

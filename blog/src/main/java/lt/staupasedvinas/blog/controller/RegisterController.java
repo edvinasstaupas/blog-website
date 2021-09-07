@@ -34,16 +34,22 @@ public class RegisterController {
 
     @PostMapping("/registerForward")
     public String registerForward(Model model, User user, HttpServletRequest httpServletRequest) {
-        User dbUser = userRepository.getByEmail(user.getEmail());
-        if (dbUser == null) {
+        User dbUser1 = userRepository.getByEmail(user.getEmail());
+        User dbUser2 = userRepository.getByUsername(user.getUsername());
+
+        if (dbUser1 != null) {
+            model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
+            model.addAttribute("register", user);
+            return "log-reg/register";
+        } else if (dbUser2 != null) {
+            model.addAttribute("msg", messageService.getMessage("user-with-username-exists"));
+            model.addAttribute("register", user);
+            return "log-reg/register";
+        } else {
             user.setUserType(new UserType(1L, "member"));
             userRepository.save(user);
             httpServletRequest.getSession().setAttribute("user", user);
             return "redirect:";
-        } else {
-            model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
-            model.addAttribute("register", user);
-            return "log-reg/register";
         }
     }
 }
