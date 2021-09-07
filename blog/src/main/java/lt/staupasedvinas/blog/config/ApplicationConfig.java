@@ -20,7 +20,6 @@ public class ApplicationConfig implements WebMvcConfigurer {
     public LocaleResolver localeResolver() {
         var sessionLocaleResolver = new SessionLocaleResolver();
         sessionLocaleResolver.setDefaultLocale(Locale.ENGLISH);
-
         return sessionLocaleResolver;
     }
 
@@ -28,7 +27,6 @@ public class ApplicationConfig implements WebMvcConfigurer {
     public LocaleChangeInterceptor localeChangeInterceptor() {
         var localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("lang");
-
         return localeChangeInterceptor;
     }
 
@@ -37,7 +35,6 @@ public class ApplicationConfig implements WebMvcConfigurer {
         var reloadableResourceBundleMessageSource = new ReloadableResourceBundleMessageSource();
         reloadableResourceBundleMessageSource.setBasename("classpath:messages");
         reloadableResourceBundleMessageSource.setDefaultEncoding("UTF-8");
-
         return reloadableResourceBundleMessageSource;
     }
 

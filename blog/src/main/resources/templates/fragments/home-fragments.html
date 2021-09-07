@@ -20,13 +20,13 @@
 <div th:fragment="search">
     <form method="POST" th:object="${postSearch}" id="searchForm">
         <div class="input-group">
-            <div class="form-outline">
-                <input type="search" id="form1" class="form-control" th:placeholder="#{home.search-placeholder}"
+            <div class="form-outline d-inline-flex">
+                <input type="search" id="form1" class="form-control" th:placeholder="${searchPlaceholder}"
                        th:field="*{keyword}"/>
+                <button type="submit" class="btn btn-dark">
+                    <i class="fas fa-search"></i>
+                </button>
             </div>
-            <button type="submit" class="btn btn-dark">
-                <i class="fas fa-search"></i>
-            </button>
         </div>
     </form>
 </div>

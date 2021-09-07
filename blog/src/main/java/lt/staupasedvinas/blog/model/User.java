@@ -3,6 +3,8 @@ package lt.staupasedvinas.blog.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,22 +15,26 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
 
     @Column(unique = true)
+    @Email
     private String email;
 
+    @NotBlank
     private String password;
 
     @ManyToOne
     @JoinColumn(name = "user_type_id",
-    foreignKey = @ForeignKey(name = "user_user_type_fkey"))
+            foreignKey = @ForeignKey(name = "user_user_type_fkey"))
     private UserType userType;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
