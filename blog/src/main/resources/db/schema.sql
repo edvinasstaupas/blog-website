@@ -1,3 +1,11 @@
+create table user_type
+(
+    id   bigint not null
+        constraint user_type_pkey
+            primary key,
+    name varchar(255)
+);
+
 create table users
 (
     id           bigint not null
@@ -23,12 +31,4 @@ create table post
     author_id bigint
         constraint user_post_author_fkey
             references users
-);
-
-create table user_type
-(
-    id   bigint not null
-        constraint user_type_pkey
-            primary key,
-    name varchar(255)
 );
