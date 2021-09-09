@@ -12,10 +12,12 @@ create table users
         constraint users_pkey
             primary key,
     email        varchar(255)
-        constraint uk_6dotkott2kjsp8vw4d0m25fb7
+        constraint unique_user_email
             unique,
     password     varchar(255),
-    username     varchar(255),
+    username     varchar(255)
+        constraint unique_user_username
+            unique,
     user_type_id bigint
         constraint user_user_type_fkey
             references user_type
