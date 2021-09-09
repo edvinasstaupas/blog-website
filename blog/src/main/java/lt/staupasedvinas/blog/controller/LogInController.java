@@ -42,6 +42,7 @@ public class LogInController {
         } else {
             model.addAttribute("logIn", user);
             model.addAttribute("msg", messageService.getMessage("bad-psw-or-no-user"));
+            log.info("User tried to log in with bad password or there is no user with such email");
             return "log-reg/login";
         }
     }

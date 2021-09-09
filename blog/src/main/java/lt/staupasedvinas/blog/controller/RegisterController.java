@@ -1,6 +1,7 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.repository.PostRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class RegisterController {
@@ -40,10 +42,12 @@ public class RegisterController {
         if (dbUser1 != null) {
             model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
             model.addAttribute("register", user);
+            log.info("User tried to register with already used email.");
             return "log-reg/register";
         } else if (dbUser2 != null) {
             model.addAttribute("msg", messageService.getMessage("user-with-username-exists"));
             model.addAttribute("register", user);
+            log.info("User tried to register with already used username.");
             return "log-reg/register";
         } else {
             user.setUserType(new UserType(1L, "member"));
