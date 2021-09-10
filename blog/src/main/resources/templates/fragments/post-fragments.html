@@ -1,0 +1,5 @@
+<div th:fragment="post">
+    <h1 class="pt-2 pb-4" th:text="${post.title}"></h1>
+    <h4 class="py-3" th:text="'Posted by ' + ${post.author.username} + ' in ' + ${post.postDate.toGMTString()}"></h4>
+    <p class="py-3" th:text="${post.text}"></p>
+</div>

@@ -2,6 +2,7 @@ package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.PostSearch;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.MessageService;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
@@ -41,6 +43,7 @@ public class HomeController {
         }
         log.info(user.toString());
 
+        model.addAttribute("posts", postService.findAll());
         model.addAttribute("postSearch", new PostSearch());
         model.addAttribute("loggedUser", user);
         model.addAttribute("lang", localeResolver.resolveLocale(httpServletRequest).getLanguage());

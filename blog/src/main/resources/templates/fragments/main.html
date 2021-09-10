@@ -1,0 +1,8 @@
+<div th:fragment="content(post)">
+    <div class="post-preview">
+        <a th:href="'post/?postId=' + ${post.id}">
+            <h2 th:text="${post.title}"></h2>
+        </a>
+    </div>
+    <hr class="my-4">
+</div>

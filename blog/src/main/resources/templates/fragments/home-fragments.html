@@ -1,7 +1,7 @@
 <div th:fragment="pageHead(language, user)">
-    <div class="head d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <div class="head d-flex flex-wrap justify-content-center py-2 px-5 mb-4 border-bottom" style="background-color: lightgray">
         <div class="logo">
-            <img id="left-logo" src="logo.png" alt="logo"/>
+            <img id="left-logo" th:src="@{/logo.png}" alt="logo"/>
         </div>
         <div class="header" th:text="#{home.header}"></div>
         <div th:replace="fragments/home-fragments :: langButtons"></div>
@@ -39,12 +39,18 @@
 <div th:fragment="langButtons">
     <div>
         <button class="btn"
-                onclick="window.location.replace('?lang=lt');"
+                onclick="window.location.assign('/?lang=lt')"
                 th:classappend="${language == 'lt' ? 'btn-outline-dark' : 'btn-outline-secondary'}">LT
         </button>
         <button class="btn"
-                onclick="window.location.replace('?lang=en')" ;
+                onclick="window.location.assign('/?lang=en')"
                 th:classappend="${language == 'en' ? 'btn-outline-dark' : 'btn-outline-secondary'}">EN
         </button>
+    </div>
+</div>
+
+<div th:fragment="content">
+    <div class="col-md-10 col-lg-8 col-xl-7" th:each="p: ${posts}">
+        <div th:replace="fragments/main :: content(post = ${p})"></div>
     </div>
 </div>

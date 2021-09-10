@@ -5,6 +5,9 @@ import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -13,5 +16,13 @@ public class PostService {
     public void createPost(Post post) {
         postRepository.save(post);
         post.getAuthor().addPost(post);
+    }
+
+    public Optional<Post> findById(Long id) {
+        return postRepository.findById(id);
+    }
+
+    public List<Post> findAll() {
+        return postRepository.findAll();
     }
 }
