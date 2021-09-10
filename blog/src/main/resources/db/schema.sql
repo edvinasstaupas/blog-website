@@ -32,5 +32,6 @@ create table post
     title     varchar(255),
     author_id bigint
         constraint user_post_author_fkey
-            references users
+            references users,
+    post_date timestamp
 );

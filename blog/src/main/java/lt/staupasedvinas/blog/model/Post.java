@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Builder
 @Getter
@@ -30,4 +31,13 @@ public class Post {
             foreignKey = @ForeignKey(name = "user_post_author_fkey")
     )
     private User author;
+
+    @Column(name = "post_date", columnDefinition = "timestamp")
+    private Date postDate;
+/*
+    @ManyToOne
+    @JoinColumn(name = "language_id",
+            foreignKey = @ForeignKey(name = "post_language_fkey"))
+    private Language language;*/
+
 }
