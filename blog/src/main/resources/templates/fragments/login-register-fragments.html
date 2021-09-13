@@ -8,7 +8,7 @@
 <div th:fragment="usernameInput">
     <div class="mb-3 form-floating w-100" id="username">
         <!--TODO change placeholder to message-->
-        <input type="text" class="form-control" id="floatingUsername" placeholder="name"
+        <input type="text" class="form-control" id="floatingUsername"
                th:field="*{username}" required >
         <label for="floatingUsername" th:text="#{login.username}"></label>
     </div>
@@ -17,7 +17,7 @@
 <div th:fragment="email">
     <div class="mb-3 form-floating w-100" id="email">
         <!--TODO change placeholder to message-->
-        <input type="email" class="form-control" id="floatingEmail" placeholder="name@example.com"
+        <input type="email" class="form-control" id="floatingEmail"
                th:field="*{email}" required autofocus>
         <label for="floatingEmail" th:text="#{login.email}"></label>
     </div>
@@ -26,7 +26,7 @@
 <div th:fragment="password">
     <!--TODO change placeholder to message-->
     <div class="form-floating mb-3 w-100" id="password">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
+        <input type="password" class="form-control" id="floatingPassword"
                th:field="*{password}" required>
         <label for="floatingPassword" th:text="#{login.password}"></label>
     </div>
