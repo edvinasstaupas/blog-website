@@ -1,6 +1,7 @@
 package lt.staupasedvinas.blog.service;
 
 import lombok.RequiredArgsConstructor;
+import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,9 @@ public class PostService {
 
     public List<Post> findAll() {
         return postRepository.findAll();
+    }
+
+    public void update(Post post) {
+        postRepository.save(post);
     }
 }

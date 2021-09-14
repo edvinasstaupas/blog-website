@@ -1,5 +1,35 @@
-<div th:fragment="post">
+<div th:fragment="post(loggedUser)">
     <h1 class="pt-2 pb-4" th:text="${post.title}"></h1>
-    <h4 class="py-3" th:text="'Posted by ' + ${post.author.username} + ' in ' + ${post.postDate.toGMTString()}"></h4>
+    <h3 class="py-3" th:text="'Posted by ' + ${post.author.username} + ' in ' + ${post.postDate.toGMTString()}"></h3>
     <p class="py-3" th:text="${post.text}"></p>
+    <hr>
+    <div id="comments">
+        <!--<form class="p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${newComment}">
+            <input class="form-control" type="text" id="text" th:field="*{text}">
+            <label th:text="#{post.comments.newComment}" for="text"></label>
+            <button class="w-25 btn btn-dark btn-user" type="submit">Comment</button>
+        </form>-->
+        <div th:if="${loggedUser.id != -1}" id="personalComment">
+            <form class="p-2 p-md-3 mb-3 border rounded-3 bg-light d-flex flex-column" method="POST"
+                  th:object="${newComment}">
+                <h3 class="mb-3" th:text="#{post.comments.inputYours}"></h3>
+                <div class="mb-3 form-floating w-100">
+                    <input type="text" class="form-control" id="text"
+                           th:field="*{text}" required autocomplete="off">
+                    <label for="text" th:text="#{post.comments.newComment}"></label>
+                    <input th:field="*{author}" th:value="${loggedUser}" type="hidden">
+                    <input th:field="*{post}" th:value="${post}" type="hidden">
+                </div>
+                <button class="w-25 btn btn-lg btn-dark" type="submit"
+                        th:text="#{post.comments.newCommentButton}"></button>
+            </form>
+        </div>
+        <div>
+            <h2 th:text="#{post.comments}"></h2>
+            <div class="py-3" th:each="comment : ${commentList}">
+                <h4 th:text="${comment.text}"></h4>
+                <h5 th:text="${comment.author.username} + ' ' + #{post.comments.commented} + ' ' +  ${comment.postDate.toGMTString()}"></h5>
+            </div>
+        </div>
+    </div>
 </div>

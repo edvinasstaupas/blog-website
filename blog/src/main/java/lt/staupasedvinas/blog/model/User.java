@@ -11,7 +11,6 @@ import java.util.List;
 @Builder
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
@@ -38,6 +37,9 @@ public class User {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Post> posts = new ArrayList<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    private List<Post> comments = new ArrayList<>();
 
     public void addPost(Post post) {
         posts.add(post);

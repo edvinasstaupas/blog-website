@@ -1,13 +1,11 @@
 package lt.staupasedvinas.blog.model;
 
-
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import java.util.*;
+import java.util.Date;
 
 @Builder
 @Getter
@@ -15,14 +13,11 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Post implements Comparable<Post>{
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    private String title;
 
     @Column(columnDefinition = "TEXT")
     @NotNull
@@ -30,7 +25,7 @@ public class Post implements Comparable<Post>{
 
     @ManyToOne
     @JoinColumn(name = "author_id",
-            foreignKey = @ForeignKey(name = "user_post_author_fkey")
+            foreignKey = @ForeignKey(name = "user_comment_author_fkey")
     )
     private User author;
 
@@ -38,15 +33,9 @@ public class Post implements Comparable<Post>{
     @Column(name = "post_date", columnDefinition = "timestamp")
     private Date postDate;
 
-    @OneToMany(mappedBy = "post")
-    private List<Comment> commentList;
-
-    public void addComment(Comment comment) {
-        commentList.add(comment);
-    }
-
-    @Override
-    public int compareTo(Post o) {
-        return this.getPostDate().compareTo(o.getPostDate());
-    }
+    @ManyToOne
+    @JoinColumn(name = "post_id",
+            foreignKey = @ForeignKey(name = "post_comment_fkey")
+    )
+    private Post post;
 }

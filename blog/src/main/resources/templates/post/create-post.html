@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<head th:include="fragments/headFragment :: headFragment(title='Create new post')">
 </head>
 <body>
 <div class="form-group">
-    <input class="form-control" type="text" placeholder="Default input">
+    <input class="form-control" type="text" placeholder="Default input" >
     <label for="exampleFormControlTextarea1">Example textarea</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
 </div>

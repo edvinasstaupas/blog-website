@@ -12,11 +12,11 @@ create table users
         constraint users_pkey
             primary key,
     email        varchar(255)
-        constraint unique_user_email
+        constraint uk_6dotkott2kjsp8vw4d0m25fb7
             unique,
     password     varchar(255),
     username     varchar(255)
-        constraint unique_user_username
+        constraint uk_r43af9ap4edm43mmtq01oddj6
             unique,
     user_type_id bigint
         constraint user_user_type_fkey
@@ -25,13 +25,28 @@ create table users
 
 create table post
 (
-    id        bigint not null
+    id        bigint       not null
         constraint post_pkey
             primary key,
-    text      text,
-    title     varchar(255),
+    post_date timestamp,
+    text      text         not null,
+    title     varchar(255) not null,
     author_id bigint
         constraint user_post_author_fkey
+            references users
+);
+
+create table comment
+(
+    id        bigint not null
+        constraint comment_pkey
+            primary key,
+    post_date timestamp,
+    text      text   not null,
+    author_id bigint
+        constraint user_comment_author_fkey
             references users,
-    post_date timestamp
+    post_id   bigint
+        constraint post_comment_fkey
+            references post
 );

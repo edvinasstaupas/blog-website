@@ -40,7 +40,6 @@ body {
     justify-content: center;
 }
 
-
 .logo {
     justify-self: flex-start;
 }
@@ -50,29 +49,15 @@ body {
     height: auto;
 }
 
-/*
-.mainContainer {
-    display: grid;
-    width: 100%;
-    grid-template-areas: "left m right";
-    grid-template-columns: 0 100% 0;
-    grid-template-rows: 1fr;
-    grid-gap: 6px;
-}
-*/
-
 .mainContainer {
     width: 100%;
 }
 
 .main {
-    /*
-    grid-area: m;
-    */
     display: flex;
+    align-content: center;
     flex-flow: column wrap;
     overflow-wrap: anywhere;
-    /*background-color: lightskyblue;*/
 }
 
 .left-side {
