@@ -4,10 +4,7 @@ package lt.staupasedvinas.blog.model;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
 import java.util.*;
 
 @Builder
@@ -39,5 +36,5 @@ public class Post {
     private Date postDate;
 
     @OneToMany(mappedBy = "post")
-    private List<Comment> commentList;
+    private List<Comment> commentList = new ArrayList<>();
 }
