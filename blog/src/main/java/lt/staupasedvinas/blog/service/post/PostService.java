@@ -2,7 +2,6 @@ package lt.staupasedvinas.blog.service.post;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
-import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;

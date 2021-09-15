@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 public class LogInController {
 
     private final UserRepository userRepository;
+
     private final PostRepository postRepository;
+
     private final MessageService messageService;
 
     @GetMapping("/login")

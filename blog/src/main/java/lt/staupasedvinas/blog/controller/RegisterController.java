@@ -20,7 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 public class RegisterController {
 
     private final UserRepository userRepository;
+
     private final PostRepository postRepository;
+
     private final MessageService messageService;
 
     @GetMapping("/register")
