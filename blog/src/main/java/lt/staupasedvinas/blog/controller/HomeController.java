@@ -16,14 +16,13 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
 
 @Slf4j
 @Controller
 @RequiredArgsConstructor
 public class HomeController {
-
-    private User user;
 
     private final LocaleResolver localeResolver;
 
@@ -35,6 +34,7 @@ public class HomeController {
     public String getHomeView(Model model, HttpServletRequest httpServletRequest) {
         var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
 
+        User user;
         if (httpUser == null) {
             user = new User();
             user.setId(-1L);
@@ -43,7 +43,7 @@ public class HomeController {
         }
         log.info(user.toString());
 
-        model.addAttribute("posts", postService.findAll());
+        model.addAttribute("posts", postService.getPostList());
         model.addAttribute("postSearch", new PostSearch());
         model.addAttribute("loggedUser", user);
         model.addAttribute("lang", localeResolver.resolveLocale(httpServletRequest).getLanguage());

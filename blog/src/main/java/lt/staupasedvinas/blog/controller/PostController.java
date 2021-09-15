@@ -34,12 +34,6 @@ public class PostController {
 
     private final CommentService commentService;
 
-    @GetMapping("/create-post")
-    public String createPost(Model model) {
-        model.addAttribute("post", new Post());
-        return "post/create-post";
-    }
-
     @GetMapping("/post")
     public String readPost(@RequestParam Long postId, Model model, HttpServletRequest httpServletRequest) {
         return getModelAfterExceptions(
@@ -59,7 +53,7 @@ public class PostController {
 
     private String getModelAfterExceptions(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result, String returnString) {
         try {
-            model = getModel(model, httpServletRequest, postId, comment, result);
+            getModel(model, httpServletRequest, postId, comment, result);
         } catch (NoSuchPostException e) {
             return "error";
         } catch (CommentErrorException e) {
@@ -68,16 +62,7 @@ public class PostController {
         return returnString;
     }
 
-    private Post getPost(Long postId) throws NoSuchPostException {
-        Optional<Post> postOptional = postService.findById(postId);
-        if (postOptional.isPresent()) {
-            return postOptional.get();
-        } else {
-            throw new NoSuchPostException(postId);
-        }
-    }
-
-    private Model getModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, CommentErrorException {
+    private void getModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, CommentErrorException {
         var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
         User user;
         if (httpUser == null) {
@@ -87,10 +72,10 @@ public class PostController {
             user = httpUser;
         }
 
-        Post post = getPost(postId);
+        Post post = postService.getPost(postId);
 
         if (comment != null) {
-            createComment(comment, result, user, post);
+            commentService.createComment(comment, result, user, post);
         }
 
         model.addAttribute("postSearch", new PostSearch());
@@ -105,31 +90,6 @@ public class PostController {
             model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder-error"));
             httpServletRequest.getSession().setAttribute("noSearchError", Boolean.TRUE);
         }
-
-        List<Comment> commentList = getCommentList(post);
-        model.addAttribute("commentList", commentList);
-
-        return model;
-    }
-
-    private void createComment(Comment comment, BindingResult result, User user, Post post) throws CommentErrorException {
-        if (result.hasErrors()) {
-            throw new CommentErrorException();
-        }
-
-        if (user.getId() != -1 && comment != null) {
-            comment.setPostDate(new Date());
-            comment.setAuthor(user);
-            comment.setPost(post);
-
-            commentService.saveComment(comment);
-            postService.update(post);
-        }
-    }
-
-    private List<Comment> getCommentList(Post post) {
-        List<Comment> commentList = post.getCommentList();
-        commentList.sort(Collections.reverseOrder(Comparator.comparing(Comment::getPostDate)));
-        return commentList;
+        model.addAttribute("commentList", commentService.getCommentList(post));
     }
 }

@@ -1,11 +1,13 @@
 package lt.staupasedvinas.blog.service;
 
 import lombok.RequiredArgsConstructor;
+import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,9 +16,8 @@ import java.util.Optional;
 public class PostService {
     private final PostRepository postRepository;
 
-    public void createPost(Post post) {
+    public void save(Post post) {
         postRepository.save(post);
-        post.getAuthor().addPost(post);
     }
 
     public Optional<Post> findById(Long id) {
@@ -27,7 +28,18 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public void update(Post post) {
-        postRepository.save(post);
+    public List<Post> getPostList() {
+        List<Post> postList = findAll();
+        postList.sort(Comparator.comparing(Post::getPostDate).reversed());
+        return postList;
+    }
+
+    public Post getPost(Long postId) throws NoSuchPostException {
+        Optional<Post> postOptional = findById(postId);
+        if (postOptional.isPresent()) {
+            return postOptional.get();
+        } else {
+            throw new NoSuchPostException(postId);
+        }
     }
 }
