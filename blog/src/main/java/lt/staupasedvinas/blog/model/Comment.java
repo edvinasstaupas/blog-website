@@ -3,6 +3,7 @@ package lt.staupasedvinas.blog.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class Comment {
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    @NotNull
+    @NotBlank
     private String text;
 
     @ManyToOne
@@ -29,7 +30,6 @@ public class Comment {
     )
     private User author;
 
-    @PastOrPresent
     @Column(name = "post_date", columnDefinition = "timestamp")
     private Date postDate;
 

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 import java.util.*;
@@ -15,17 +16,17 @@ import java.util.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Post implements Comparable<Post>{
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotBlank
     private String title;
 
     @Column(columnDefinition = "TEXT")
-    @NotNull
+    @NotBlank
     private String text;
 
     @ManyToOne
@@ -34,19 +35,9 @@ public class Post implements Comparable<Post>{
     )
     private User author;
 
-    @PastOrPresent
     @Column(name = "post_date", columnDefinition = "timestamp")
     private Date postDate;
 
     @OneToMany(mappedBy = "post")
     private List<Comment> commentList;
-
-    public void addComment(Comment comment) {
-        commentList.add(comment);
-    }
-
-    @Override
-    public int compareTo(Post o) {
-        return this.getPostDate().compareTo(o.getPostDate());
-    }
 }

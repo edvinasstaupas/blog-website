@@ -1,6 +1,7 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.staupasedvinas.blog.exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
@@ -11,12 +12,14 @@ import lt.staupasedvinas.blog.service.MessageService;
 import lt.staupasedvinas.blog.service.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -39,29 +42,30 @@ public class PostController {
 
     @GetMapping("/post")
     public String readPost(@RequestParam Long postId, Model model, HttpServletRequest httpServletRequest) {
-        try {
-            model = getModel(model, httpServletRequest, postId, null);
-        } catch (NoSuchPostException e) {
-            return "error";
-        }
-
-        return "post/post";
+        return getModelAfterExceptions(
+                model, httpServletRequest, postId, null, null, "post/post");
     }
 
     @PostMapping("/post")
-    public String createCommentForward(@RequestParam Long postId, Model model, Comment comment, HttpServletRequest httpServletRequest) {
+    public String createCommentForward(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest) {
         return "forward:/createComment";
     }
 
-    @PostMapping("createComment")
-    public String createComment(@RequestParam Long postId, Model model, Comment comment, HttpServletRequest httpServletRequest) {
+    @PostMapping("/createComment")
+    public String postCreateComment(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest) {
+        return getModelAfterExceptions(
+                model, httpServletRequest, postId, comment, result, "redirect:/post?postId=" + postId);
+    }
+
+    private String getModelAfterExceptions(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result, String returnString) {
         try {
-            model = getModel(model, httpServletRequest, postId, comment);
+            model = getModel(model, httpServletRequest, postId, comment, result);
         } catch (NoSuchPostException e) {
             return "error";
+        } catch (CommentErrorException e) {
+            e.printStackTrace();
         }
-
-        return "redirect:/post?postId=" + postId;
+        return returnString;
     }
 
     private Post getPost(Long postId) throws NoSuchPostException {
@@ -69,12 +73,11 @@ public class PostController {
         if (postOptional.isPresent()) {
             return postOptional.get();
         } else {
-            //TODO do something here ERROR
             throw new NoSuchPostException(postId);
         }
     }
 
-    private Model getModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment) throws NoSuchPostException {
+    private Model getModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, CommentErrorException {
         var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
         User user;
         if (httpUser == null) {
@@ -86,13 +89,8 @@ public class PostController {
 
         Post post = getPost(postId);
 
-        if (user.getId() != -1 && comment != null) {
-            comment.setPostDate(new Date());
-            comment.setAuthor(user);
-            comment.setPost(post);
-
-            commentService.saveComment(comment);
-            postService.update(post);
+        if (comment != null) {
+            createComment(comment, result, user, post);
         }
 
         model.addAttribute("postSearch", new PostSearch());
@@ -112,6 +110,21 @@ public class PostController {
         model.addAttribute("commentList", commentList);
 
         return model;
+    }
+
+    private void createComment(Comment comment, BindingResult result, User user, Post post) throws CommentErrorException {
+        if (result.hasErrors()) {
+            throw new CommentErrorException();
+        }
+
+        if (user.getId() != -1 && comment != null) {
+            comment.setPostDate(new Date());
+            comment.setAuthor(user);
+            comment.setPost(post);
+
+            commentService.saveComment(comment);
+            postService.update(post);
+        }
     }
 
     private List<Comment> getCommentList(Post post) {
