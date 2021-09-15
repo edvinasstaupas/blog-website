@@ -5,10 +5,9 @@ import lt.staupasedvinas.blog.exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
-import lt.staupasedvinas.blog.model.PostSearch;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.CommentService;
-import lt.staupasedvinas.blog.service.MessageService;
+import lt.staupasedvinas.blog.service.ModelService;
 import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +15,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -27,11 +25,9 @@ public class PostController {
 
     private final PostService postService;
 
-    private final LocaleResolver localeResolver;
-
-    private final MessageService messageService;
-
     private final CommentService commentService;
+
+    private final ModelService modelService;
 
     @GetMapping("/post")
     public String readPost(@RequestParam Long postId, Model model, HttpServletRequest httpServletRequest) {
@@ -70,25 +66,13 @@ public class PostController {
         } else {
             user = httpUser;
         }
-
         Post post = postService.getPost(postId);
-
         if (comment != null) {
             commentService.createComment(comment, result, user, post);
         }
 
-        model.addAttribute("postSearch", new PostSearch());
-        model.addAttribute("loggedUser", user);
-        model.addAttribute("lang", localeResolver.resolveLocale(httpServletRequest).getLanguage());
-        model.addAttribute("post", post);
-        model.addAttribute("newComment", new Comment());
-        if (httpServletRequest.getSession().getAttribute("noSearchError") == null
-                || (Boolean) httpServletRequest.getSession().getAttribute("noSearchError")) {
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder"));
-        } else {
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder-error"));
-            httpServletRequest.getSession().setAttribute("noSearchError", Boolean.TRUE);
-        }
+        modelService.updateModel(model, user, httpServletRequest);
+
         model.addAttribute("commentList", commentService.getCommentList(post));
     }
 }

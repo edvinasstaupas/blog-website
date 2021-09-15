@@ -4,14 +4,12 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.PostSearch;
 import lt.staupasedvinas.blog.model.User;
-import lt.staupasedvinas.blog.service.MessageService;
-import lt.staupasedvinas.blog.service.post.PostService;
+import lt.staupasedvinas.blog.service.ModelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -21,16 +19,11 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class HomeController {
 
-    private final LocaleResolver localeResolver;
-
-    private final PostService postService;
-
-    private final MessageService messageService;
+    private final ModelService modelService;
 
     @GetMapping
     public String getHomeView(Model model, HttpServletRequest httpServletRequest) {
         var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
-
         User user;
         if (httpUser == null) {
             user = new User();
@@ -38,20 +31,8 @@ public class HomeController {
         } else {
             user = httpUser;
         }
-        log.info(user.toString());
 
-        model.addAttribute("posts", postService.getPostList());
-        model.addAttribute("postSearch", new PostSearch());
-        model.addAttribute("loggedUser", user);
-        model.addAttribute("lang", localeResolver.resolveLocale(httpServletRequest).getLanguage());
-        if (httpServletRequest.getSession().getAttribute("noSearchError") == null
-                || (Boolean) httpServletRequest.getSession().getAttribute("noSearchError")) {
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder"));
-        } else {
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder-error"));
-            httpServletRequest.getSession().setAttribute("noSearchError", Boolean.TRUE);
-        }
-        log.info(localeResolver.resolveLocale(httpServletRequest).getLanguage());
+        modelService.updateModel(model, user, httpServletRequest);
 
         return "home/home";
     }
@@ -67,6 +48,7 @@ public class HomeController {
             httpServletRequest.getSession().setAttribute("noSearchError", Boolean.FALSE);
             return "redirect:";
         }
-        return "post/post";
+        httpServletRequest.getSession().setAttribute("noSearchError", Boolean.TRUE);
+        return "redirect:";
     }
 }
