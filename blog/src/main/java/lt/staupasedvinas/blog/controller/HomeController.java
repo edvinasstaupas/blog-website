@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.PostSearch;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.ModelService;
+import lt.staupasedvinas.blog.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,19 +22,11 @@ public class HomeController {
 
     private final ModelService modelService;
 
+    private final UserService userService;
+
     @GetMapping
     public String getHomeView(Model model, HttpServletRequest httpServletRequest) {
-        var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
-        User user;
-        if (httpUser == null) {
-            user = new User();
-            user.setId(-1L);
-        } else {
-            user = httpUser;
-        }
-
-        modelService.updateModel(model, user, httpServletRequest);
-
+        modelService.updateHomeModel(model, httpServletRequest);
         return "home/home";
     }
 

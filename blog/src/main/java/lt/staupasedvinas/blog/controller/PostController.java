@@ -3,9 +3,8 @@ package lt.staupasedvinas.blog.controller;
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
+import lt.staupasedvinas.blog.exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.Comment;
-import lt.staupasedvinas.blog.model.Post;
-import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.CommentService;
 import lt.staupasedvinas.blog.service.ModelService;
 import lt.staupasedvinas.blog.service.post.PostService;
@@ -32,7 +31,7 @@ public class PostController {
     @GetMapping("/post")
     public String readPost(@RequestParam Long postId, Model model, HttpServletRequest httpServletRequest) {
         return getModelAfterExceptions(
-                model, httpServletRequest, postId, null, null, "post/post");
+                model, httpServletRequest, postId);
     }
 
     @PostMapping("/post")
@@ -48,31 +47,23 @@ public class PostController {
 
     private String getModelAfterExceptions(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result, String returnString) {
         try {
-            getModel(model, httpServletRequest, postId, comment, result);
+            modelService.updatePostModel(model, httpServletRequest, postId, comment, result);
         } catch (NoSuchPostException e) {
             return "error";
         } catch (CommentErrorException e) {
-            e.printStackTrace();
+            return "error";
+        } catch (NoUserException e) {
+            return "error";
         }
         return returnString;
     }
 
-    private void getModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, CommentErrorException {
-        var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
-        User user;
-        if (httpUser == null) {
-            user = new User();
-            user.setId(-1L);
-        } else {
-            user = httpUser;
+    private String getModelAfterExceptions(Model model, HttpServletRequest httpServletRequest, Long postId) {
+        try {
+            modelService.updatePostModel(model, httpServletRequest, postId);
+        } catch (NoSuchPostException e) {
+            return "error";
         }
-        Post post = postService.getPost(postId);
-        if (comment != null) {
-            commentService.createComment(comment, result, user, post);
-        }
-
-        modelService.updateModel(model, user, httpServletRequest);
-
-        model.addAttribute("commentList", commentService.getCommentList(post));
+        return "post/post";
     }
 }
