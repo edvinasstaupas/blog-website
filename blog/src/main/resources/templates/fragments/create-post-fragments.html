@@ -1,0 +1,22 @@
+<div th:fragment="title">
+    <div class="mb-3 form-floating w-100" id="floatingTitle">
+        <input type="text" class="form-control" id="title"
+               th:field="*{title}" required autofocus>
+        <label for="title" th:text="#{post.title}"></label>
+    </div>
+</div>
+
+<div th:fragment="text">
+    <div class="mb-3 form-floating w-100 form-group" id="floatingText">
+        <textarea class="form-control" id="text" style="max-height: 65vh; height: 60vh" th:field="*{text}"
+                  required></textarea>
+        <label for="text" th:text="#{post.text}"></label>
+    </div>
+</div>
+
+<div th:fragment="submit">
+    <!--
+      <div th:replace="fragments/login-register-fragments :: errorMessage(msg=${message})"></div>
+    -->
+    <button class="w-25 btn btn-lg btn-dark align-self-end" type="submit">Submit</button>
+</div>

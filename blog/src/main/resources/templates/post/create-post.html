@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head th:include="fragments/headFragment :: headFragment(title='Create new post')">
+<head th:include="fragments/headFragment :: headFragment(title='Log in')">
 </head>
 <body>
-<div class="form-group">
-    <input class="form-control" type="text" placeholder="Default input" >
-    <label for="exampleFormControlTextarea1">Example textarea</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+<div class="d-flex justify-content-center align-items-center" style="height: 95vh">
+    <form class="w-75 p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${newPost}">
+        <div th:replace="fragments/create-post-fragments :: title"></div>
+        <div th:replace="fragments/create-post-fragments :: text"></div>
+        <div th:replace="fragments/create-post-fragments :: submit"></div>
+    </form>
 </div>
+<div th:include="fragments/headFragment :: footer"></div>
 </body>
 </html>
