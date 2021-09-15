@@ -23,6 +23,7 @@ body {
 }
 
 .headerRight {
+    margin-left: 2px;
     justify-self: flex-end;
     display: flex;
     flex-flow: row wrap;
@@ -31,7 +32,18 @@ body {
 }
 
 .headerRight > * {
-    margin: 2px 4px;
+    margin: 2px;
+}
+
+#userButtons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#userButtons > * {
+    margin: 2px;
 }
 
 #searchForm {
@@ -103,6 +115,6 @@ a:active {
     text-decoration: none;
 }
 
-p {
-    font-size: 1.25rem;
+#postText {
+    font-size: 1.5rem;
 }

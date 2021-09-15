@@ -1,7 +1,9 @@
-<div th:fragment="post(loggedUser)">
+<div th:fragment="post">
     <h1 class="pt-2 pb-4" th:text="${post.title}"></h1>
     <h3 class="py-3" th:text="'Posted by ' + ${post.author.username} + ' in ' + ${post.postDate.toGMTString()}"></h3>
-    <p class="py-3" th:text="${post.text}"></p>
+    <div id="postText">
+        <p class="py-3" th:utext="${post.text}" th:remove="none"></p>
+    </div>
     <hr>
     <div id="comments">
         <!--<form class="p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${newComment}">
@@ -17,8 +19,6 @@
                     <input type="text" class="form-control" id="text"
                            th:field="*{text}" required autocomplete="off">
                     <label for="text" th:text="#{post.comments.newComment}"></label>
-                    <input th:field="*{author}" th:value="${loggedUser}" type="hidden">
-                    <input th:field="*{post}" th:value="${post}" type="hidden">
                 </div>
                 <button class="w-25 btn btn-lg btn-dark" type="submit"
                         th:text="#{post.comments.newCommentButton}"></button>
