@@ -2,11 +2,10 @@ package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.PostSearch;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.MessageService;
-import lt.staupasedvinas.blog.service.PostService;
+import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,8 +15,6 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Comparator;
-import java.util.List;
 
 @Slf4j
 @Controller
