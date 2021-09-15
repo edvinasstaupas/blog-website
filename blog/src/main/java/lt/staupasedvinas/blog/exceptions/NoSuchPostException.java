@@ -1,7 +1,7 @@
 package lt.staupasedvinas.blog.exceptions;
 
-public class NoSuchPostException extends Exception {
+public class NoSuchPostException extends NoSuchEntityException {
     public NoSuchPostException(Long id) {
-        super("No user with id " + id);
+        super("User", id);
     }
 }
