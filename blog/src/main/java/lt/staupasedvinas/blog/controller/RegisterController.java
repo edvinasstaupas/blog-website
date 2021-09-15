@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.model.UserType;
-import lt.staupasedvinas.blog.repository.PostRepository;
 import lt.staupasedvinas.blog.repository.UserRepository;
 import lt.staupasedvinas.blog.service.MessageService;
 import org.springframework.stereotype.Controller;
@@ -20,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 public class RegisterController {
 
     private final UserRepository userRepository;
-
-    private final PostRepository postRepository;
 
     private final MessageService messageService;
 
@@ -40,7 +37,6 @@ public class RegisterController {
     public String registerForward(Model model, User user, HttpServletRequest httpServletRequest) {
         User dbUser1 = userRepository.getByEmail(user.getEmail());
         User dbUser2 = userRepository.getByUsername(user.getUsername());
-
         if (dbUser1 != null) {
             model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
             model.addAttribute("register", user);

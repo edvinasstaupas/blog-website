@@ -5,7 +5,6 @@ import lt.staupasedvinas.blog.exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.post.PostCreateService;
-import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,12 +18,12 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class PostCreateController {
 
-    private final PostService postService;
-
     private final PostCreateService postCreateService;
 
     @GetMapping("/create-post")
-    public String createPostView(Model model) {
+    public String createPostView(Model model, HttpServletRequest request) {
+        if (request.getSession().getAttribute("user") == null)
+            return "redirect:";
         model.addAttribute("newPost", new Post());
         return "post/create-post";
     }
@@ -41,7 +40,6 @@ public class PostCreateController {
             model.addAttribute("newPost", post);
             return "post/create-post";
         }
-
         //TODO do something with that try catch
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
@@ -52,7 +50,6 @@ public class PostCreateController {
             }
         }
         postCreateService.createPost(post, user);
-
         return "redirect:/post?postId=" + post.getId();
     }
 }
