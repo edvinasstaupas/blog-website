@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.exceptions.NoUserException;
-import lt.staupasedvinas.blog.model.Comment;
-import lt.staupasedvinas.blog.model.Post;
-import lt.staupasedvinas.blog.model.PostSearch;
-import lt.staupasedvinas.blog.model.User;
+import lt.staupasedvinas.blog.model.*;
 import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -53,6 +50,7 @@ public class ModelService {
             model.addAttribute("newComment", new Comment());
         model.addAttribute("post", post);
         model.addAttribute("commentList", commentService.getCommentList(post));
+        model.addAttribute("editComment", new Comment());
     }
 
     private void updateBaseModel(Model model, HttpServletRequest httpServletRequest) {

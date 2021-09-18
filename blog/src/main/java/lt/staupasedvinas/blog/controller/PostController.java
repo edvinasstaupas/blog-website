@@ -5,15 +5,15 @@ import lt.staupasedvinas.blog.exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.Comment;
+import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.service.CommentService;
 import lt.staupasedvinas.blog.service.ModelService;
 import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -35,7 +35,11 @@ public class PostController {
     }
 
     @PostMapping("/post")
-    public String createCommentForward(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest) {
+    public String createCommentForward(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest, EditOrDeleteObj editOrDeleteObj, RedirectAttributes redirectAttributes) {
+        if (comment.getId() == null) {
+            redirectAttributes.addFlashAttribute("editOrDeleteObj", editOrDeleteObj);
+            return "redirect:/edit-comment";
+        }
         return "forward:/createComment";
     }
 

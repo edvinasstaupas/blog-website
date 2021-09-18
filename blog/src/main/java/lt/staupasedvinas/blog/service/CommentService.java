@@ -21,6 +21,7 @@ public class CommentService {
     private final CommentRepository commentRepository;
 
     public void saveComment(Comment comment) {
+        comment.setPostDate(new Date());
         commentRepository.save(comment);
     }
 
@@ -30,10 +31,8 @@ public class CommentService {
         }
 
         if (user.getId() != -1 && comment != null) {
-            comment.setPostDate(new Date());
             comment.setAuthor(user);
             comment.setPost(post);
-
             saveComment(comment);
         }
     }
@@ -42,5 +41,13 @@ public class CommentService {
         List<Comment> commentList = post.getCommentList();
         commentList.sort(Collections.reverseOrder(Comparator.comparing(Comment::getPostDate)));
         return commentList;
+    }
+
+    public Comment getComment(Long commentId) {
+        return commentRepository.getById(commentId);
+    }
+
+    public void deleteComment(Comment comment) {
+        commentRepository.delete(comment);
     }
 }

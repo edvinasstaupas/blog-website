@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="text">
+    <div class="mb-3 form-floating w-100 form-group" id="floatingText">
+        <textarea class="form-control" id="text" style="max-height: 65vh; height: 60vh" th:attr="name='text'"
+                  th:text="${comment.text}"
+                  required></textarea>
+    </div>
+</div>
+
+<div th:fragment="submit">
+    <div class="w-100 d-inline-flex">
+        <button class="w-50 ml-2 btn btn-lg btn-dark" type="submit" th:text="#{comment.edit.edit}"></button>
+    </div>
+</div>
+
+<div th:fragment="hidden">
+    <input type="hidden" th:value="${comment.id}" th:attr="name='id'">
+    <input type="hidden" th:value="${comment.post.id}" th:attr="name='post'">
+    <input type="hidden" th:value="${comment.author.id}" th:attr="name='author'">
+</div>
+
+</html>
