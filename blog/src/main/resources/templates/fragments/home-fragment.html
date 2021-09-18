@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <div th:fragment="page">
     <div th:replace="fragments/home-fragments :: pageHead(language=${lang}, user=${loggedUser})"></div>
     <div class="mainContainer">
@@ -14,3 +17,5 @@
         <div class="left-side banner"></div>
     </div>
 </div>
+
+</html>

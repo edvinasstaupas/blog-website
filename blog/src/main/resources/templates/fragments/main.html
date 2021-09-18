@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <div th:fragment="content(post)">
     <div class="post-preview">
         <a th:href="'post/?postId=' + ${post.id}">
@@ -6,3 +9,5 @@
     </div>
     <hr class="my-4">
 </div>
+
+</html>

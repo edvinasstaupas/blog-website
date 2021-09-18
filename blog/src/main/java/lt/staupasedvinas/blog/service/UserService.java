@@ -13,6 +13,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User getUserFromHttpServletRequest(HttpServletRequest httpServletRequest) {
+        //TODO change to return null and edit /home
         var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
         User user;
         if (httpUser == null) {

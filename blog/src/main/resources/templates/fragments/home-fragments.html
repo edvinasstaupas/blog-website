@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <div th:fragment="pageHead(language, user)">
     <div class="head d-flex flex-wrap justify-content-center py-2 px-5 mb-4 border-bottom"
          style="background-color: lightgray">
@@ -72,3 +75,5 @@
         <div th:replace="fragments/main :: content(post = ${p})"></div>
     </div>
 </div>
+
+</html>
