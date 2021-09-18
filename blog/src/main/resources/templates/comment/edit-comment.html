@@ -4,7 +4,7 @@
 </head>
 <body>
 <div class="d-flex justify-content-center align-items-center" style="height: 95vh">
-  <form class="w-75 p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${comment}">
+  <form class="w-75 p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${editedComment}">
     <div th:replace="fragments/edit-comment-fragments :: text"></div>
     <div th:replace="fragments/edit-comment-fragments :: submit"></div>
     <div th:replace="fragments/edit-comment-fragments :: hidden"></div>

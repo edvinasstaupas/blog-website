@@ -1,6 +1,7 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
+import lt.staupasedvinas.blog.DTO.CommentEditDTO;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.service.CommentService;
@@ -17,20 +18,22 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class CommentEditController {
 
+    private Comment classComment;
+
     private final CommentService commentService;
 
     @GetMapping("/edit-comment")
     public String editCommentCreateView(Model model, HttpServletRequest httpServletRequest) {
         Map<String, ?> flashAttributes = RequestContextUtils.getInputFlashMap(httpServletRequest);
         EditOrDeleteObj editOrDeleteObj = (EditOrDeleteObj) flashAttributes.get("editOrDeleteObj");
-        Comment comment = commentService.getComment(editOrDeleteObj.getObjId());
+        classComment = commentService.getComment(editOrDeleteObj.getObjId());
         if (editOrDeleteObj.getAction().equals("edit")) {
-            model.addAttribute("comment", comment);
-            model.addAttribute("editedComment", new Comment());
-            return "/edit-comment";
+            model.addAttribute("comment", classComment);
+            model.addAttribute("editedComment", new CommentEditDTO());
+            return "/comment/edit-comment";
         } else if (editOrDeleteObj.getAction().equals("delete")) {
-            Long postId = comment.getPost().getId();
-            commentService.deleteComment(comment);
+            Long postId = classComment.getPost().getId();
+            commentService.deleteComment(classComment);
             return "redirect:/post/?postId=" + postId;
         }
         //if more options were added input ifs here
@@ -38,9 +41,10 @@ public class CommentEditController {
     }
 
     @PostMapping("edit-comment")
-    public String editCommentPost(Comment comment) {
-        commentService.saveComment(comment);
-        return "redirect:/post/?postId=" + comment.getPost().getId();
+    public String editCommentPost(CommentEditDTO editedComment) {
+        classComment.setText(editedComment.getText());
+        commentService.saveComment(classComment);
+        return "redirect:/post/?postId=" + classComment.getPost().getId();
     }
 
     /*//TODO add isEdited ir editDate
