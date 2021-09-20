@@ -49,7 +49,7 @@ public class PostCreateController {
                 return "redirect:";
             }
         }
-        postCreateService.createPost(post, user);
+        postCreateService.create(post, user);
         return "redirect:/post?postId=" + post.getId();
     }
 }

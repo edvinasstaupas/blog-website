@@ -20,12 +20,12 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    public void saveComment(Comment comment) {
+    public void save(Comment comment) {
         comment.setPostDate(new Date());
         commentRepository.save(comment);
     }
 
-    public void createComment(Comment comment, BindingResult result, User user, Post post) throws CommentErrorException {
+    public void create(Comment comment, BindingResult result, User user, Post post) throws CommentErrorException {
         if (result.hasErrors()) {
             throw new CommentErrorException();
         }
@@ -33,11 +33,11 @@ public class CommentService {
         if (user.getId() != -1 && comment != null) {
             comment.setAuthor(user);
             comment.setPost(post);
-            saveComment(comment);
+            save(comment);
         }
     }
 
-    public List<Comment> getCommentList(Post post) {
+    public List<Comment> getList(Post post) {
         List<Comment> commentList = post.getCommentList();
         commentList.sort(Collections.reverseOrder(Comparator.comparing(Comment::getPostDate)));
         return commentList;
@@ -47,11 +47,11 @@ public class CommentService {
         return commentRepository.getById(commentId);
     }
 
-    public void deleteComment(Comment comment) {
+    public void delete(Comment comment) {
         commentRepository.delete(comment);
     }
 
     public void deletePostComments(Post post) {
-        post.getCommentList().forEach(this::deleteComment);
+        post.getCommentList().forEach(this::delete);
     }
 }

@@ -29,18 +29,18 @@ public class ModelService {
 
     public void updateHomeModel(Model model, HttpServletRequest httpServletRequest) {
         updateBaseModel(model, httpServletRequest);
-        model.addAttribute("posts", postService.getPostList());
+        model.addAttribute("posts", postService.getList());
     }
 
     public void updatePostModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, NoUserException, CommentErrorException {
         User user = userService.getUserFromHttpServletRequest(httpServletRequest);
-        Post post = postService.getPost(postId);
-        commentService.createComment(comment, result, user, post);
+        Post post = postService.getById(postId);
+        commentService.create(comment, result, user, post);
         updateBasePostModel(model, httpServletRequest, post);
     }
 
     public void updatePostModel(Model model, HttpServletRequest httpServletRequest, Long postId) throws NoSuchPostException {
-        Post post = postService.getPost(postId);
+        Post post = postService.getById(postId);
         updateBasePostModel(model, httpServletRequest, post);
     }
 
@@ -49,7 +49,7 @@ public class ModelService {
         if (userService.getUserFromHttpServletRequest(httpServletRequest) != null)
             model.addAttribute("newComment", new Comment());
         model.addAttribute("post", post);
-        model.addAttribute("commentList", commentService.getCommentList(post));
+        model.addAttribute("commentList", commentService.getList(post));
         model.addAttribute("editComment", new Comment());
     }
 

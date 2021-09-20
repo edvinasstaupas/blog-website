@@ -1,7 +1,6 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.DTO.CommentEditDTO;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.DTO.PostEditDTO;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
@@ -29,13 +28,13 @@ public class PostEditController {
     public String editPostCreateView(Model model, HttpServletRequest httpServletRequest) throws NoSuchPostException {
         Map<String, ?> flashAttributes = RequestContextUtils.getInputFlashMap(httpServletRequest);
         EditOrDeleteObj editOrDeleteObj = (EditOrDeleteObj) flashAttributes.get("editOrDeleteObj");
-        classPost = postService.getPost(editOrDeleteObj.getObjId());
+        classPost = postService.getById(editOrDeleteObj.getObjId());
         if (editOrDeleteObj.getAction().equals("edit")) {
             model.addAttribute("post", classPost);
             model.addAttribute("editedPost", new PostEditDTO());
             return "/post/edit-post";
         } else if (editOrDeleteObj.getAction().equals("delete")) {
-            postService.deletePost(classPost);
+            postService.delete(classPost);
             return "redirect:/";
         }
         //if more options were added input ifs here

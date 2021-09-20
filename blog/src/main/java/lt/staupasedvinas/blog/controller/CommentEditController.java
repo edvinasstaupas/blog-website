@@ -33,7 +33,7 @@ public class CommentEditController {
             return "/comment/edit-comment";
         } else if (editOrDeleteObj.getAction().equals("delete")) {
             Long postId = classComment.getPost().getId();
-            commentService.deleteComment(classComment);
+            commentService.delete(classComment);
             return "redirect:/post/?postId=" + postId;
         }
         //if more options were added input ifs here
@@ -43,7 +43,7 @@ public class CommentEditController {
     @PostMapping("edit-comment")
     public String editCommentPost(CommentEditDTO editedComment) {
         classComment.setText(editedComment.getText());
-        commentService.saveComment(classComment);
+        commentService.save(classComment);
         return "redirect:/post/?postId=" + classComment.getPost().getId();
     }
 

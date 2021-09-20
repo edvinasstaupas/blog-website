@@ -13,7 +13,7 @@ public class PostCreateService {
 
     private final PostService postService;
 
-    public void createPost(Post post, User user) {
+    public void create(Post post, User user) {
         post.setPostDate(new Date());
         post.setAuthor(user);
         postService.save(post);

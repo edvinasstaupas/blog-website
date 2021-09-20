@@ -31,13 +31,13 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public List<Post> getPostList() {
+    public List<Post> getList() {
         List<Post> postList = findAll();
         postList.sort(Comparator.comparing(Post::getPostDate).reversed());
         return postList;
     }
 
-    public Post getPost(Long postId) throws NoSuchPostException {
+    public Post getById(Long postId) throws NoSuchPostException {
         Optional<Post> postOptional = findById(postId);
         if (postOptional.isPresent()) {
             return postOptional.get();
@@ -46,7 +46,7 @@ public class PostService {
         }
     }
 
-    public void deletePost(Post post) {
+    public void delete(Post post) {
         commentService.deletePostComments(post);
         postRepository.delete(post);
     }
