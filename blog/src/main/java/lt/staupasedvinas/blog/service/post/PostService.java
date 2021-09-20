@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
+import lt.staupasedvinas.blog.service.CommentService;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
@@ -13,7 +14,10 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class PostService {
+
     private final PostRepository postRepository;
+
+    private final CommentService commentService;
 
     public void save(Post post) {
         postRepository.save(post);
@@ -40,5 +44,10 @@ public class PostService {
         } else {
             throw new NoSuchPostException(postId);
         }
+    }
+
+    public void deletePost(Post post) {
+        commentService.deletePostComments(post);
+        postRepository.delete(post);
     }
 }

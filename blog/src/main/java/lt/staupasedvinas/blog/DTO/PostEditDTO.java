@@ -7,11 +7,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class EditOrDeleteObj {
+public class PostEditDTO {
 
-    private String obj;
+    private String title;
 
-    private Long objId;
-
-    private String action;
+    private String text;
 }

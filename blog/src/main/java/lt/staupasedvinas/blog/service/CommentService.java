@@ -50,4 +50,8 @@ public class CommentService {
     public void deleteComment(Comment comment) {
         commentRepository.delete(comment);
     }
+
+    public void deletePostComments(Post post) {
+        post.getCommentList().forEach(this::deleteComment);
+    }
 }

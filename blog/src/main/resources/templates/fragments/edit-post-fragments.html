@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="title">
+    <div class="mb-3 form-floating w-100" id="floatingTitle">
+        <textarea style="resize: none" class="form-control" id="title"
+                  th:text="${post.title}" th:attr="name='title'" required autofocus>
+        </textarea>
+        <label for="title" th:text="#{post.title}"></label>
+    </div>
+</div>
+
+<div th:fragment="text">
+    <div class="mb-3 form-floating w-100 form-group" id="floatingText">
+        <textarea class="form-control" id="text" style="max-height: 65vh; height: 60vh" th:attr="name='text'"
+                  th:text="${post.text}" required></textarea>
+        <label for="title" th:text="#{post.text}"></label>
+    </div>
+</div>
+
+<div th:fragment="submit">
+    <!--
+      <div th:replace="fragments/login-register-fragments :: errorMessage(msg=${message})"></div>
+    -->
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
+</div>
+
+</html>

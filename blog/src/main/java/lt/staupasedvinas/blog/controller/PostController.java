@@ -36,9 +36,14 @@ public class PostController {
 
     @PostMapping("/post")
     public String createCommentForward(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest, EditOrDeleteObj editOrDeleteObj, RedirectAttributes redirectAttributes) {
-        if (comment.getId() == null) {
-            redirectAttributes.addFlashAttribute("editOrDeleteObj", editOrDeleteObj);
-            return "redirect:/edit-comment";
+        if (comment.getText() == null) {
+            if (editOrDeleteObj.getObj().equals("comment")) {
+                redirectAttributes.addFlashAttribute("editOrDeleteObj", editOrDeleteObj);
+                return "redirect:/edit-comment";
+            } else if (editOrDeleteObj.getObj().equals("post")) {
+                redirectAttributes.addFlashAttribute("editOrDeleteObj", editOrDeleteObj);
+                return "redirect:/edit-post";
+            }
         }
         return "forward:/createComment";
     }
