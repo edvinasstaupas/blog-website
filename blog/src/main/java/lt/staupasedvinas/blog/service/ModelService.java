@@ -6,6 +6,7 @@ import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.*;
 import lt.staupasedvinas.blog.service.post.PostService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -27,20 +28,21 @@ public class ModelService {
 
     private final CommentService commentService;
 
-    public void updateHomeModel(Model model, HttpServletRequest httpServletRequest) {
+    public void updateHomeModel(Model model, HttpServletRequest httpServletRequest, Pageable page) {
         updateBaseModel(model, httpServletRequest);
-        model.addAttribute("posts", postService.getList());
+        //model.addAttribute("posts", postService.findAllPaginated(page));
+        model.addAttribute("posts", postService.findAll());
     }
 
     public void updatePostModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, NoUserException, CommentErrorException {
         User user = userService.getUserFromHttpServletRequest(httpServletRequest);
-        Post post = postService.getById(postId);
+        Post post = postService.findById(postId);
         commentService.create(comment, result, user, post);
         updateBasePostModel(model, httpServletRequest, post);
     }
 
     public void updatePostModel(Model model, HttpServletRequest httpServletRequest, Long postId) throws NoSuchPostException {
-        Post post = postService.getById(postId);
+        Post post = postService.findById(postId);
         updateBasePostModel(model, httpServletRequest, post);
     }
 
@@ -66,5 +68,9 @@ public class ModelService {
             model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder-error"));
             httpServletRequest.getSession().setAttribute("noSearchError", Boolean.TRUE);
         }
+    }
+
+    public void updateHeadModel(Model model, HttpServletRequest httpServletRequest) {
+        updateBaseModel(model, httpServletRequest);
     }
 }

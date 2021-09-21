@@ -28,7 +28,7 @@ public class PostEditController {
     public String editPostCreateView(Model model, HttpServletRequest httpServletRequest) throws NoSuchPostException {
         Map<String, ?> flashAttributes = RequestContextUtils.getInputFlashMap(httpServletRequest);
         EditOrDeleteObj editOrDeleteObj = (EditOrDeleteObj) flashAttributes.get("editOrDeleteObj");
-        classPost = postService.getById(editOrDeleteObj.getObjId());
+        classPost = postService.findById(editOrDeleteObj.getObjId());
         if (editOrDeleteObj.getAction().equals("edit")) {
             model.addAttribute("post", classPost);
             model.addAttribute("editedPost", new PostEditDTO());
