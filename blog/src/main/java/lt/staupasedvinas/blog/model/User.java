@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Comparable<User>{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +38,14 @@ public class User {
     private List<Post> posts = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
-    private List<Post> comments = new ArrayList<>();
+    private List<Comment> comments = new ArrayList<>();
 
     public void addPost(Post post) {
         posts.add(post);
+    }
+
+    @Override
+    public int compareTo(User o) {
+        return Math.toIntExact(this.getId() - o.getId());
     }
 }

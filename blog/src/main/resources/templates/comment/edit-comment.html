@@ -7,7 +7,6 @@
   <form class="w-75 p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${editedComment}">
     <div th:replace="fragments/edit-comment-fragments :: text"></div>
     <div th:replace="fragments/edit-comment-fragments :: submit"></div>
-    <div th:replace="fragments/edit-comment-fragments :: hidden"></div>
   </form>
 </div>
 <div th:include="fragments/headFragment :: footer"></div>

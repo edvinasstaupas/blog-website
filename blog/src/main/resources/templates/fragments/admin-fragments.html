@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<tr th:fragment="users(user)">
+    <td>
+        <h2 th:text="${user.id}"></h2>
+    </td>
+    <td>
+        <h2 th:text="${user.username}"></h2>
+    </td>
+    <td>
+        <h2 th:text="${#lists.size(user.posts)}"></h2>
+    </td>
+    <td>
+        <h2 th:text="${#lists.size(user.comments)}"></h2>
+    </td>
+    <td>
+        <h2 th:text="${user.userType.name}"></h2>
+    </td>
+    <td>
+        <form method="post" th:object="${editOrDeleteObj}">
+            <div class="d-flex">
+                <input type="hidden" th:value="${u.id}" th:attr="name='objId'">
+                <button type="submit" class="btn btn-danger mr-1"
+                        th:value="'makeAdmin'"
+                        th:attr="name='action'" >
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button type="submit" class="btn btn-danger ml-1"
+                        th:value="'removeAdmin'"
+                        th:attr="name='action'">
+                    <i class="fas fa-user-minus"></i>
+                </button>
+            </div>
+        </form>
+    </td>
+</tr>
+
+</html>
