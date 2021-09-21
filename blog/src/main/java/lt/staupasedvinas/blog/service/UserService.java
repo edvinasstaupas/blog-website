@@ -14,28 +14,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements IService<User> {
     private final UserRepository userRepository;
 
     public User getUserFromHttpServletRequest(HttpServletRequest httpServletRequest) {
         return (User) httpServletRequest.getSession().getAttribute("user");
-    }
-
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-    public User findById(Long objId) throws NoSuchUserException {
-        Optional<User> optionalUser = userRepository.findById(objId);
-        if (optionalUser.isPresent())
-            return optionalUser.get();
-        else {
-            throw new NoSuchUserException(objId);
-        }
-    }
-
-    public void save(User user) {
-        userRepository.save(user);
     }
 
     public void makeAdmin(Long id) throws NoSuchUserException {
@@ -54,5 +37,29 @@ public class UserService {
         List<User> list = findAll();
         Collections.sort(list);
         return list;
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    @Override
+    public void save(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void delete(User user) {
+        userRepository.delete(user);
+    }
+
+    @Override
+    public User findById(Long id) throws NoSuchUserException {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent())
+            return optionalUser.get();
+        else {
+            throw new NoSuchUserException(id);
+        }
     }
 }
