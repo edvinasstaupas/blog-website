@@ -40,10 +40,6 @@ public class User implements Comparable<User>{
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Comment> comments = new ArrayList<>();
 
-    public void addPost(Post post) {
-        posts.add(post);
-    }
-
     @Override
     public int compareTo(User o) {
         return Math.toIntExact(this.getId() - o.getId());

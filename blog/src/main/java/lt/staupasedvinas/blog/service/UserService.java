@@ -18,16 +18,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public User getUserFromHttpServletRequest(HttpServletRequest httpServletRequest) {
-        //TODO change to return null and edit /home
-        var httpUser = (User) httpServletRequest.getSession().getAttribute("user");
-        User user;
-        if (httpUser == null) {
-            user = new User();
-            user.setId(-1L);
-        } else {
-            user = httpUser;
-        }
-        return user;
+        return (User) httpServletRequest.getSession().getAttribute("user");
     }
 
     public List<User> findAll() {
