@@ -40,7 +40,7 @@
     </div>
     <hr>
     <div id="comments">
-        <div th:if="${loggedUser.id != -1}" id="personalComment">
+        <div th:if="${loggedUser != null}" id="personalComment">
             <form class="p-2 p-md-3 mb-3 border rounded-3 bg-light d-flex flex-column" method="POST"
                   th:object="${newComment}">
                 <h3 class="mb-3" th:text="#{post.comments.inputYours}"></h3>

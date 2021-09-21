@@ -1,7 +1,7 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.NoUserException;
+import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.post.PostCreateService;
@@ -36,7 +36,7 @@ public class PostCreateController {
     @PostMapping("/create-post-forward")
     public String createPost(Model model, @Valid Post post, BindingResult result, HttpServletRequest request) {
         if (result.hasErrors()) {
-            //TODO ERROR
+            //model.addAttribute("errorList", result.getAllErrors());
             model.addAttribute("newPost", post);
             return "post/create-post";
         }

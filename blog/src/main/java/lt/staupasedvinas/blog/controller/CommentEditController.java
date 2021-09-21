@@ -5,6 +5,7 @@ import lt.staupasedvinas.blog.DTO.CommentEditDTO;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.service.CommentService;
+import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchCommentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,11 @@ public class CommentEditController {
     public String editCommentCreateView(Model model, HttpServletRequest httpServletRequest) {
         Map<String, ?> flashAttributes = RequestContextUtils.getInputFlashMap(httpServletRequest);
         EditOrDeleteObj editOrDeleteObj = (EditOrDeleteObj) flashAttributes.get("editOrDeleteObj");
-        classComment = commentService.getComment(editOrDeleteObj.getObjId());
+        try {
+            classComment = commentService.findById(editOrDeleteObj.getObjId());
+        } catch (NoSuchCommentException e) {
+            return "error";
+        }
         if (editOrDeleteObj.getAction().equals("edit")) {
             model.addAttribute("comment", classComment);
             model.addAttribute("editedComment", new CommentEditDTO());

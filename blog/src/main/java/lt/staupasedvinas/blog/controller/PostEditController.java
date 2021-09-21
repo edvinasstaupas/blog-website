@@ -3,7 +3,7 @@ package lt.staupasedvinas.blog.controller;
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.DTO.PostEditDTO;
-import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
+import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package lt.staupasedvinas.blog.service;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.NoSuchUserException;
+import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.repository.UserRepository;

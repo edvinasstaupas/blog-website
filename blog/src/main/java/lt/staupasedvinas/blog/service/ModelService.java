@@ -1,9 +1,9 @@
 package lt.staupasedvinas.blog.service;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.CommentErrorException;
-import lt.staupasedvinas.blog.exceptions.NoSuchPostException;
-import lt.staupasedvinas.blog.exceptions.NoUserException;
+import lt.staupasedvinas.blog.exceptions.entity_error_exception.CommentErrorException;
+import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
+import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.*;
 import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +51,7 @@ public class ModelService {
         if (userService.getUserFromHttpServletRequest(httpServletRequest) != null)
             model.addAttribute("newComment", new Comment());
         model.addAttribute("post", post);
-        model.addAttribute("commentList", commentService.getList(post));
+        model.addAttribute("commentList", commentService.findAll(post));
         model.addAttribute("editComment", new Comment());
     }
 
