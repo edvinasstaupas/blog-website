@@ -11,16 +11,16 @@
 
 <div th:fragment="email">
     <div class="mb-3 form-floating w-100" id="email">
-        <input type="email" class="form-control" id="floatingEmail"
-               th:field="*{email}" required autofocus>
+        <input name="loginEmail" class="form-control" id="floatingEmail"
+               required autofocus>
         <label for="floatingEmail" th:text="#{login.email}"></label>
     </div>
 </div>
 
 <div th:fragment="password">
     <div class="form-floating mb-3 w-100" id="password">
-        <input type="password" class="form-control" id="floatingPassword"
-               th:field="*{password}" required>
+        <input name="loginPassword" type="password" class="form-control" id="floatingPassword"
+               required>
         <label for="floatingPassword" th:text="#{login.password}"></label>
     </div>
 </div>

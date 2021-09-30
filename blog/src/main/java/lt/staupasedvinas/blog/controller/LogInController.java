@@ -23,7 +23,7 @@ public class LogInController {
 
     @GetMapping("/login")
     public String loginView(Model model) {
-        model.addAttribute("logIn", new User());
+        //model.addAttribute("logIn", new User());
         return "log-reg/login";
     }
 
