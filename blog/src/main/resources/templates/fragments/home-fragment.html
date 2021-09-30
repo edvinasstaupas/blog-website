@@ -8,13 +8,20 @@
         <div class="main">
             <div class="container pt-4 px-3 px-lg-3 m-2">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-12" th:each="p: ${posts}">
-                        <div th:replace="fragments/main :: content(post = ${p})"></div>
+                    <div class="container-fluid mt-2" th:if="${posts.hasContent()}">
+                        <div class="container">
+                            <div>
+                                <div class="col-12" th:each="p: ${posts.content}">
+                                    <div th:replace="fragments/main :: content(post = ${p})"></div>
+                                </div>
+                                <div th:include="fragments/main :: paginator(endpoint=${'/'}, pagebaleObj=${posts})"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <div class="left-side banner"></div>
             </div>
         </div>
-        <div class="left-side banner"></div>
     </div>
 </div>
 

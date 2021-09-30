@@ -30,8 +30,8 @@ public class ModelService {
 
     public void updateHomeModel(Model model, HttpServletRequest httpServletRequest, Pageable page) {
         updateBaseModel(model, httpServletRequest);
-        //model.addAttribute("posts", postService.findAllPaginated(page));
-        model.addAttribute("posts", postService.findAll());
+        model.addAttribute("posts", postService.findAllPaginated(page));
+        //model.addAttribute("posts", postService.findAll());
     }
 
     public void updatePostModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, NoUserException, CommentErrorException {
