@@ -28,7 +28,7 @@ public class HomeController {
     private final UserService userService;
 
     @GetMapping
-    public String getHomeView(Model model, HttpServletRequest httpServletRequest, @PageableDefault(size = 1, sort = {"postDate"}, direction = Sort.Direction.DESC) Pageable page) {
+    public String getHomeView(Model model, HttpServletRequest httpServletRequest, @PageableDefault(size = 8, sort = {"postDate"}, direction = Sort.Direction.DESC) Pageable page) {
         modelService.updateHomeModel(model, httpServletRequest, page);
         return "home/home";
     }
