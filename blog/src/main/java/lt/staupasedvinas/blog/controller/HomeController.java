@@ -6,6 +6,9 @@ import lt.staupasedvinas.blog.model.PostSearch;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.ModelService;
 import lt.staupasedvinas.blog.service.UserService;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,8 +28,8 @@ public class HomeController {
     private final UserService userService;
 
     @GetMapping
-    public String getHomeView(Model model, HttpServletRequest httpServletRequest) {
-        modelService.updateHomeModel(model, httpServletRequest);
+    public String getHomeView(Model model, HttpServletRequest httpServletRequest, @PageableDefault(size = 8, sort = {"postDate"}, direction = Sort.Direction.DESC) Pageable page) {
+        modelService.updateHomeModel(model, httpServletRequest, page);
         return "home/home";
     }
 

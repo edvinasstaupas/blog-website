@@ -71,7 +71,7 @@
 </div>
 
 <div th:fragment="content">
-    <div class="col-md-10 col-lg-8 col-xl-7" th:each="p: ${posts}">
+    <div class="col-md-10 col-lg-8 col-xl-7">
         <div th:replace="fragments/main :: content(post = ${p})"></div>
     </div>
 </div>
