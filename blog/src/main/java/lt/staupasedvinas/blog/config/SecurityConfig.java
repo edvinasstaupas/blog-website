@@ -1,14 +1,21 @@
 package lt.staupasedvinas.blog.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+
+import javax.sql.DataSource;
 
 @Configuration
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -43,6 +50,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
+                .jdbcAuthentication()
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username, password, TRUE AS enabled from users where username = ?")
+                .authoritiesByUsernameQuery("select username, 'USER' AS authority from users where username = ?")
+                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
+    }
+
+    /*@Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth
                 .inMemoryAuthentication()
                 .withUser("user")
 //                        .password("{noop}a") // password without encoding. Password as is plain text -> password is a
@@ -52,5 +69,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin")
                 .password("{bcrypt}$2a$15$7HPzdEPDl16h9b6MJMbJsO7ylrJQn4xFgGf4m0.FVEa1V8hFGcC.a") // pass
                 .roles("USER", "ADMIN");
-    }
+    }*/
 }
