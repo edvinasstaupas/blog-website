@@ -15,7 +15,9 @@
         <h2 th:text="${#lists.size(user.comments)}"></h2>
     </td>
     <td>
-        <h2 th:text="${user.userType.name}"></h2>
+        <div th:each="r : ${user.roles}">
+            <h2 th:text="${r.name}"></h2>
+        </div>
     </td>
     <td>
         <form method="post" th:object="${editOrDeleteObj}">

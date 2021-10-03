@@ -2,8 +2,8 @@ package lt.staupasedvinas.blog.service;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
+import lt.staupasedvinas.blog.model.Role;
 import lt.staupasedvinas.blog.model.User;
-import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,13 +26,13 @@ public class UserService implements IModelService<User>, UserDetailsService {
 
     public void makeAdmin(Long id) throws NoSuchUserException {
         User user = findById(id);
-        user.setUserType(new UserType(2L, "admin"));
+        addRole(user, RoleFactory.getAdminRole());
         save(user);
     }
 
     public void removeAdmin(Long id) throws NoSuchUserException {
         User user = findById(id);
-        user.setUserType(new UserType(1L, "user"));
+        removeRole(user, RoleFactory.getAdminRole());
         save(user);
     }
 
@@ -44,6 +44,23 @@ public class UserService implements IModelService<User>, UserDetailsService {
 
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    public User getByEmail(String email) {
+        return userRepository.getByEmail(email);
+    }
+
+    public User getByUsername(String email) {
+        return userRepository.getByUsername(email);
+    }
+
+    public void removeRole(User user, Role role) {
+        user.getRoles().removeIf(r -> r.equals(role));
+
+    }
+
+    public void addRole(User user, Role role) {
+        user.getRoles().add(role);
     }
 
     @Override

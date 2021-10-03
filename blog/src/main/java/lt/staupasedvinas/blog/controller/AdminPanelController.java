@@ -25,9 +25,10 @@ public class AdminPanelController {
     @GetMapping
     public String getAdminPanelView(Model model, HttpServletRequest httpServletRequest) {
         modelService.updateHeadModel(model, httpServletRequest);
-        if (model.getAttribute("loggedUser") == null) {
+        //TODO change this authentication
+        /*if (model.getAttribute("loggedUser") == null) {
             return "redirect:/";
-        }
+        }*/
         model.addAttribute("users", userService.findAllSorted());
         EditOrDeleteObj editOrDeleteObj = new EditOrDeleteObj();
         editOrDeleteObj.setObj("user");

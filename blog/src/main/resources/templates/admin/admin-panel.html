@@ -23,7 +23,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <div th:each="u: ${users}">
+                        <div th:each="u : ${users}">
                             <div th:replace="fragments/admin-fragments :: users(user = ${u})"></div>
                         </div>
                         </tbody>

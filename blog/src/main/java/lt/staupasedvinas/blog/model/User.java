@@ -2,7 +2,6 @@ package lt.staupasedvinas.blog.model;
 
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -10,6 +9,7 @@ import javax.validation.constraints.Email;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -33,16 +33,14 @@ public class User implements Comparable<User>, UserDetails {
 
     private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "user_type_id",
-            foreignKey = @ForeignKey(name = "user_user_type_fkey"))
-    private UserType userType;
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Post> posts = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
     private List<Comment> comments = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     @Override
     public int compareTo(User o) {
@@ -51,7 +49,7 @@ public class User implements Comparable<User>, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("USER"));
+        return this.roles;
     }
 
     @Override

@@ -3,9 +3,9 @@ package lt.staupasedvinas.blog.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.User;
-import lt.staupasedvinas.blog.model.UserType;
-import lt.staupasedvinas.blog.repository.UserRepository;
 import lt.staupasedvinas.blog.service.MessageService;
+import lt.staupasedvinas.blog.service.RoleFactory;
+import lt.staupasedvinas.blog.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequiredArgsConstructor
 public class RegisterController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     private final MessageService messageService;
 
@@ -35,8 +35,8 @@ public class RegisterController {
 
     @PostMapping("/registerForward")
     public String registerForward(Model model, User user, HttpServletRequest httpServletRequest) {
-        User dbUser1 = userRepository.getByEmail(user.getEmail());
-        User dbUser2 = userRepository.getByUsername(user.getUsername());
+        User dbUser1 = userService.getByEmail(user.getEmail());
+        User dbUser2 = userService.getByUsername(user.getUsername());
         if (dbUser1 != null) {
             model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
             model.addAttribute("register", user);
@@ -48,8 +48,8 @@ public class RegisterController {
             log.info("User tried to register with already used username.");
             return "log-reg/register";
         } else {
-            user.setUserType(new UserType(1L, "member"));
-            userRepository.save(user);
+            userService.addRole(user, RoleFactory.getUserRole());
+            userService.save(user);
             httpServletRequest.getSession().setAttribute("user", user);
             return "redirect:";
         }
