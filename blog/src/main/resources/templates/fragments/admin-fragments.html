@@ -3,32 +3,36 @@
 
 <tr th:fragment="users(user)">
     <td>
-        <h2 th:text="${user.id}"></h2>
+        <h3 th:text="${user.id}"></h3>
     </td>
     <td>
-        <h2 th:text="${user.username}"></h2>
+        <h3 th:text="${user.username}"></h3>
     </td>
     <td>
-        <h2 th:text="${#lists.size(user.posts)}"></h2>
+        <h3 th:text="${#lists.size(user.posts)}"></h3>
     </td>
     <td>
-        <h2 th:text="${#lists.size(user.comments)}"></h2>
+        <h3 th:text="${#lists.size(user.comments)}"></h3>
     </td>
     <td>
         <div th:each="r : ${user.roles}">
-            <h2 th:text="${r.name}"></h2>
+            <div th:if="${r.name ne 'USER'}">
+                <h3 th:text="${r.name}"></h3>
+            </div>
         </div>
     </td>
     <td>
         <form method="post" th:object="${editOrDeleteObj}">
-            <div class="d-flex">
-                <input type="hidden" th:value="${u.id}" th:attr="name='objId'">
-                <button type="submit" class="btn btn-danger mr-1"
+            <input type="hidden" th:value="${u.id}" th:attr="name='objId'">
+            <div th:unless="${user.hasPrivileges()}">
+                <button type="submit" class="btn btn-danger"
                         th:value="'makeAdmin'"
-                        th:attr="name='action'" >
+                        th:attr="name='action'">
                     <i class="fas fa-user-plus"></i>
                 </button>
-                <button type="submit" class="btn btn-danger ml-1"
+            </div>
+            <div th:if="${user.hasPrivileges()}">
+                <button type="submit" class="btn btn-danger"
                         th:value="'removeAdmin'"
                         th:attr="name='action'">
                     <i class="fas fa-user-minus"></i>

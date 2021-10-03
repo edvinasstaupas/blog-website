@@ -1,6 +1,7 @@
 package lt.staupasedvinas.blog.model;
 
 import lombok.*;
+import lt.staupasedvinas.blog.service.RoleFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -41,6 +42,10 @@ public class User implements Comparable<User>, UserDetails {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    public boolean hasPrivileges() {
+        return roles.contains(RoleFactory.getAdminRole());
+    }
 
     @Override
     public int compareTo(User o) {
