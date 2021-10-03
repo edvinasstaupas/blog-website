@@ -23,13 +23,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/public/**", "/login", "/register", "/", "/post/**").permitAll()
                 .antMatchers("/private/**", "/create-post", "/edit-post", "/edit-comment", "/admin-panel", "/**").authenticated()
-                //.antMatchers("/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .csrf()
-                //TODO paklausti ar sitas legalus :D
                 .disable()
+                //TODO paklausti ar sitas legalus :D
                 .formLogin()
                 .permitAll()
                 .loginPage("/login")
@@ -41,8 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        // visa kita logika kuria mes nenorim apsaugoti
+    public void configure(WebSecurity web) {
         web.ignoring().requestMatchers(
                 PathRequest.toStaticResources().atCommonLocations());
     }
@@ -56,18 +54,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authoritiesByUsernameQuery("select username, 'USER' AS authority from users where username = ?")
                 .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder());
     }
-
-    /*@Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .inMemoryAuthentication()
-                .withUser("user")
-//                        .password("{noop}a") // password without encoding. Password as is plain text -> password is a
-                .password("{bcrypt}$2y$10$Em6UwCBD5zprZnwXr6vBsuTGQxViYG9nAjBcHXmn1xFK9S6posTay")  // password with encoding. Password is a
-                .roles("USER")
-                .and()
-                .withUser("admin")
-                .password("{bcrypt}$2a$15$7HPzdEPDl16h9b6MJMbJsO7ylrJQn4xFgGf4m0.FVEa1V8hFGcC.a") // pass
-                .roles("USER", "ADMIN");
-    }*/
 }
