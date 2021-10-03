@@ -25,7 +25,7 @@ public class LogInController {
     public String loginView(Model model) {
         return "log-reg/login";
     }
-
+/*
     @PostMapping("/login")
     public String forward(Model model, User user) {
         return "forward:/loginForward";
@@ -43,5 +43,5 @@ public class LogInController {
             log.info("User tried to log in with bad password or there is no user with such email");
             return "log-reg/login";
         }
-    }
+    }*/
 }
