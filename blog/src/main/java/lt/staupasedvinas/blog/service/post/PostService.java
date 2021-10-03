@@ -5,7 +5,7 @@ import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostExc
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
 import lt.staupasedvinas.blog.service.CommentService;
-import lt.staupasedvinas.blog.service.IService;
+import lt.staupasedvinas.blog.service.IModelService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PostService implements IService<Post> {
+public class PostService implements IModelService<Post> {
 
     private final PostRepository postRepository;
 

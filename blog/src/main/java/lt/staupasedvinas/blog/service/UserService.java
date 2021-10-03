@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IService<User>, UserDetailsService {
+public class UserService implements IModelService<User>, UserDetailsService {
     private final UserRepository userRepository;
 
     public User getUserFromHttpServletRequest(HttpServletRequest httpServletRequest) {

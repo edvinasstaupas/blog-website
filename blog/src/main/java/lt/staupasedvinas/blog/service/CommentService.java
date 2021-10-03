@@ -14,7 +14,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class CommentService implements IService<Comment> {
+public class CommentService implements IModelService<Comment> {
 
     private final CommentRepository commentRepository;
 
