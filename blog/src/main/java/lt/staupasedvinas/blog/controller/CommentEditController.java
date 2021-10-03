@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,13 +18,14 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/edit-comment")
 public class CommentEditController {
 
     private Comment classComment;
 
     private final CommentService commentService;
 
-    @GetMapping("/edit-comment")
+    @GetMapping()
     public String editCommentCreateView(Model model, HttpServletRequest httpServletRequest) {
         Map<String, ?> flashAttributes = RequestContextUtils.getInputFlashMap(httpServletRequest);
         EditOrDeleteObj editOrDeleteObj = (EditOrDeleteObj) flashAttributes.get("editOrDeleteObj");
@@ -45,7 +47,7 @@ public class CommentEditController {
         return "redirect:/";
     }
 
-    @PostMapping("edit-comment")
+    @PostMapping()
     public String editCommentPost(CommentEditDTO editedComment) {
         classComment.setText(editedComment.getText());
         commentService.save(classComment);

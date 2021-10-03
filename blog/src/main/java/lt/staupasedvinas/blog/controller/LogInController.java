@@ -23,7 +23,6 @@ public class LogInController {
 
     @GetMapping("/login")
     public String loginView(Model model) {
-        //model.addAttribute("logIn", new User());
         return "log-reg/login";
     }
 
@@ -34,7 +33,7 @@ public class LogInController {
 
     @PostMapping("/loginForward")
     public String loginForward(Model model, User user, HttpServletRequest httpServletRequest) {
-        User dbUser = userRepository.getByEmail(user.getEmail());
+        User dbUser = userRepository.getByUsername(user.getUsername());
         if (dbUser != null && dbUser.getPassword().equals(user.getPassword())) {
             httpServletRequest.getSession().setAttribute("user", dbUser);
             return "redirect:";
