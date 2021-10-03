@@ -5,6 +5,9 @@ import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserExc
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.model.UserType;
 import lt.staupasedvinas.blog.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +17,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IService<User> {
+public class UserService implements IService<User>, UserDetailsService {
     private final UserRepository userRepository;
 
     public User getUserFromHttpServletRequest(HttpServletRequest httpServletRequest) {
@@ -61,5 +64,10 @@ public class UserService implements IService<User> {
         else {
             throw new NoSuchUserException(id);
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.getOptionalByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User with username: '" + username + "' not found!"));
     }
 }
