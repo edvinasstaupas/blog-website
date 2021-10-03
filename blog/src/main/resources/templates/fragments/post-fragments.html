@@ -55,7 +55,7 @@
             </div>
             <div>
                 <h2 th:text="#{post.comments}"></h2>
-                <div class="py-3" th:each="comment : ${commentList}">
+                <div th:each="comment : ${commentList}">
                     <div class="container">
                         <div class="row">
                             <div class="col-10">
