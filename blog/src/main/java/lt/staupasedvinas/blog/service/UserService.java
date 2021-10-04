@@ -47,11 +47,11 @@ public class UserService implements IModelService<User>, UserDetailsService {
     }
 
     public User getByEmail(String email) {
-        return userRepository.getByEmail(email);
+        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User with email: '" + email + "' not found!"));
     }
 
-    public User getByUsername(String email) {
-        return userRepository.getByUsername(email);
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User with username: '" + username + "' not found!"));
     }
 
     public void removeRole(User user, Role role) {
@@ -85,6 +85,6 @@ public class UserService implements IModelService<User>, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.getOptionalByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User with username: '" + username + "' not found!"));
+        return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User with username: '" + username + "' not found!"));
     }
 }

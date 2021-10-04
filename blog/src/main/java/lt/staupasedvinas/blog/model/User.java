@@ -34,13 +34,13 @@ public class User implements Comparable<User>, UserDetails {
 
     private String password;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    @OneToMany(mappedBy = "author")
     private List<Post> posts = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "author")
+    @OneToMany(mappedBy = "author")
     private List<Comment> comments = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany()
     private Set<Role> roles;
 
     public boolean hasPrivileges() {
