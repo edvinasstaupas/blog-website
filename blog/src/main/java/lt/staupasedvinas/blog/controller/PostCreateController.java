@@ -1,9 +1,10 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.User;
+import lt.staupasedvinas.blog.service.ModelService;
+import lt.staupasedvinas.blog.service.user.UserService;
 import lt.staupasedvinas.blog.service.post.PostCreateService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +21,13 @@ public class PostCreateController {
 
     private final PostCreateService postCreateService;
 
+    private final ModelService modelService;
+
+    private final UserService userService;
+
     @GetMapping("/create-post")
     public String createPostView(Model model, HttpServletRequest request) {
-        if (request.getSession().getAttribute("user") == null)
-            return "redirect:";
+        modelService.updateHeadModel(model, request);
         model.addAttribute("newPost", new Post());
         return "post/create-post";
     }
@@ -41,13 +45,9 @@ public class PostCreateController {
             return "post/create-post";
         }
         //TODO do something with that try catch
-        User user = (User) request.getSession().getAttribute("user");
+        User user = userService.getUserFromHttpServletRequest(request);
         if (user == null) {
-            try {
-                throw new NoUserException();
-            } catch (NoUserException e) {
-                return "redirect:";
-            }
+            return "redirect:";
         }
         postCreateService.create(post, user);
         return "redirect:/post?postId=" + post.getId();

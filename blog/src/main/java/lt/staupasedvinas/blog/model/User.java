@@ -1,16 +1,13 @@
 package lt.staupasedvinas.blog.model;
 
 import lombok.*;
-import lt.staupasedvinas.blog.service.RoleFactory;
+import lt.staupasedvinas.blog.service.user.RoleFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Builder
 @Getter
@@ -41,7 +38,7 @@ public class User implements Comparable<User>, UserDetails {
     private List<Comment> comments = new ArrayList<>();
 
     @ManyToMany()
-    private Set<Role> roles;
+    private Set<Role> roles = new HashSet<>();
 
     public boolean hasPrivileges() {
         return roles.contains(RoleFactory.getAdminRole());

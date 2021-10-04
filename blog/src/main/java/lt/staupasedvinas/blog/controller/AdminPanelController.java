@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
 import lt.staupasedvinas.blog.service.ModelService;
-import lt.staupasedvinas.blog.service.UserService;
+import lt.staupasedvinas.blog.service.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

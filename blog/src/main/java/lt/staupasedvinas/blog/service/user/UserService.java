@@ -1,10 +1,12 @@
-package lt.staupasedvinas.blog.service;
+package lt.staupasedvinas.blog.service.user;
 
 import lombok.RequiredArgsConstructor;
+import lt.staupasedvinas.blog.exceptions.authentication_exceptions.EmailNotFoundException;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
 import lt.staupasedvinas.blog.model.Role;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.repository.UserRepository;
+import lt.staupasedvinas.blog.service.IModelService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,7 +23,10 @@ public class UserService implements IModelService<User>, UserDetailsService {
     private final UserRepository userRepository;
 
     public User getUserFromHttpServletRequest(HttpServletRequest httpServletRequest) {
-        return (User) httpServletRequest.getSession().getAttribute("user");
+        var userPrinciple = httpServletRequest.getUserPrincipal();
+        if (userPrinciple == null)
+            return null;
+        return getByUsername(userPrinciple.getName());
     }
 
     public void makeAdmin(Long id) throws NoSuchUserException {
@@ -47,11 +52,19 @@ public class UserService implements IModelService<User>, UserDetailsService {
     }
 
     public User getByEmail(String email) {
-        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User with email: '" + email + "' not found!"));
+        return userRepository.findByEmail(email).orElseThrow(() -> new EmailNotFoundException("User with email: '" + email + "' not found!"));
     }
 
     public User getByUsername(String username) {
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User with username: '" + username + "' not found!"));
+    }
+
+    public User getByEmailNoException(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+
+    public User getByUsernameNoException(String username) {
+        return userRepository.findByUsername(username).orElse(null);
     }
 
     public void removeRole(User user, Role role) {

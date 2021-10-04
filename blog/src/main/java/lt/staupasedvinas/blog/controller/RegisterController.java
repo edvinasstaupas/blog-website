@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.MessageService;
-import lt.staupasedvinas.blog.service.RoleFactory;
-import lt.staupasedvinas.blog.service.UserService;
+import lt.staupasedvinas.blog.service.user.RoleFactory;
+import lt.staupasedvinas.blog.service.user.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +35,8 @@ public class RegisterController {
 
     @PostMapping("/registerForward")
     public String registerForward(Model model, User user, HttpServletRequest httpServletRequest) {
-        User dbUser1 = userService.getByEmail(user.getEmail());
-        User dbUser2 = userService.getByUsername(user.getUsername());
+        User dbUser1 = userService.getByEmailNoException(user.getEmail());
+        User dbUser2 = userService.getByUsernameNoException(user.getUsername());
         if (dbUser1 != null) {
             model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
             model.addAttribute("register", user);
@@ -50,7 +50,7 @@ public class RegisterController {
         } else {
             userService.addRole(user, RoleFactory.getUserRole());
             userService.save(user);
-            httpServletRequest.getSession().setAttribute("user", user);
+            //TODO login automatically here
             return "redirect:";
         }
     }
