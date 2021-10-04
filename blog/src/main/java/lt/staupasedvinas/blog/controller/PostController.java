@@ -1,14 +1,12 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.entity_error_exception.CommentErrorException;
+import lt.staupasedvinas.blog.exceptions.entity_error_exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
-import lt.staupasedvinas.blog.service.CommentService;
 import lt.staupasedvinas.blog.service.ModelService;
-import lt.staupasedvinas.blog.service.post.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,10 +19,6 @@ import javax.validation.Valid;
 @Controller
 @RequiredArgsConstructor
 public class PostController {
-
-    private final PostService postService;
-
-    private final CommentService commentService;
 
     private final ModelService modelService;
 

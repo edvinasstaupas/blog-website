@@ -1,7 +1,7 @@
 package lt.staupasedvinas.blog.service;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.entity_error_exception.CommentErrorException;
+import lt.staupasedvinas.blog.exceptions.entity_error_exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchCommentException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
