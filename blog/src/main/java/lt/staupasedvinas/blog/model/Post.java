@@ -28,8 +28,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "author_id",
-            foreignKey = @ForeignKey(name = "user_post_author_fkey")
-    )
+            foreignKey = @ForeignKey(name = "user_post_author_fkey"))
     private User author;
 
     @Column(name = "post_date", columnDefinition = "timestamp")
