@@ -11,11 +11,11 @@
         <div class="header" th:text="#{home.header}" onclick="location.href='/'"></div>
         <div th:replace="fragments/home-fragments :: langButtons"></div>
         <div class="headerRight">
-            <div th:if="${user == null}">
+            <div sec:authorize="isAnonymous()">
                 <div th:replace="fragments/home-fragments :: logRegButtons"></div>
             </div>
             <div>
-                <div id="userButtons" th:if="${user != null}">
+                <div id="userButtons" sec:authorize="isAuthenticated()">
                     <div th:replace="fragments/home-fragments :: createPost"></div>
                     <div sec:authorize="hasRole('ADMIN')">
                         <div th:replace="fragments/home-fragments :: adminPanelButton"></div>
