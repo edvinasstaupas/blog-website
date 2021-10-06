@@ -5,6 +5,7 @@ import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
 import lt.staupasedvinas.blog.service.ModelService;
 import lt.staupasedvinas.blog.service.user.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,13 +23,10 @@ public class AdminPanelController {
 
     private final ModelService modelService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public String getAdminPanelView(Model model, HttpServletRequest httpServletRequest) {
         modelService.updateHeadModel(model, httpServletRequest);
-        //TODO change this authentication
-        /*if (model.getAttribute("loggedUser") == null) {
-            return "redirect:/";
-        }*/
         model.addAttribute("users", userService.findAllSorted());
         EditOrDeleteObj editOrDeleteObj = new EditOrDeleteObj();
         editOrDeleteObj.setObj("user");
