@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div class="w-100" th:fragment="post">
     <div class="container">
@@ -40,7 +41,7 @@
         </div>
         <hr>
         <div id="comments">
-            <div th:if="${loggedUser != null}" id="personalComment">
+            <div sec:authorize="isAuthenticated()" id="personalComment">
                 <form class="p-2 p-md-3 mb-3 border rounded-3 bg-light d-flex flex-column" method="POST"
                       th:object="${newComment}">
                     <h3 class="mb-3" th:text="#{post.comments.inputYours}"></h3>
@@ -49,7 +50,7 @@
                                th:field="*{text}" required autocomplete="off">
                         <label for="text" th:text="#{post.comments.newComment}"></label>
                     </div>
-                    <button class="w-25 btn btn-lg btn-dark" type="submit"
+                    <button class="w-25 btn btn-lg btn-dark" style="min-width: 150px" type="submit"
                             th:text="#{post.comments.newCommentButton}"></button>
                 </form>
             </div>
@@ -60,7 +61,7 @@
                         <div class="row">
                             <div class="col-10">
                                 <h4 th:text="${comment.text}"></h4>
-                                <h5 th:text="${comment.author.username} + ' ' + #{post.comments.commented} + ' ' +  ${comment.postDate.toGMTString()}"></h5>
+                                <h5 th:text="${comment.author.username} + ' ' + ${@commentService.getTimeFromNow(comment)}"></h5>
                             </div>
                             <div class="col-2">
                                 <form method="POST" th:object="${editOrDeleteObj}">

@@ -6,6 +6,7 @@ import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostExc
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
+import lt.staupasedvinas.blog.service.CommentService;
 import lt.staupasedvinas.blog.service.ModelService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 @RequiredArgsConstructor
 public class PostController {
 
     private final ModelService modelService;
+
+    private final CommentService commentService;
 
     @GetMapping("/post")
     public String readPost(@RequestParam Long postId, Model model, HttpServletRequest httpServletRequest) {
