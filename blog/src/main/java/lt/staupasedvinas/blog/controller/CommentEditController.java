@@ -53,17 +53,4 @@ public class CommentEditController {
         commentService.save(classComment);
         return "redirect:/post/?postId=" + classComment.getPost().getId();
     }
-
-    /*//TODO add isEdited ir editDate
-    @PostMapping("/edit-comment")
-    public String editComment(Comment comment) {
-        commentService.saveComment(comment);
-        return "redirect:/post?postId=" + comment.getPost().getId();
-    }
-
-    @GetMapping("/delete-comment")
-    public String deleteComment(Comment comment) {
-        commentService.deleteComment(comment);
-        return "redirect:/post?postId=" + comment.getPost().getId();
-    }*/
 }
