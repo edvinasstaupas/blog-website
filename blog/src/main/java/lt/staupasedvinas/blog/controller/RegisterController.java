@@ -6,6 +6,7 @@ import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.MessageService;
 import lt.staupasedvinas.blog.service.user.RoleFactory;
 import lt.staupasedvinas.blog.service.user.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,8 @@ public class RegisterController {
     private final UserService userService;
 
     private final MessageService messageService;
+
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/register")
     public String registerView(Model model) {
@@ -48,6 +51,7 @@ public class RegisterController {
             log.info("User tried to register with already used username.");
             return "log-reg/register";
         } else {
+            userService.encodePassword(user, passwordEncoder);
             userService.addRole(user, RoleFactory.getUserRole());
             userService.save(user);
             //TODO login automatically here

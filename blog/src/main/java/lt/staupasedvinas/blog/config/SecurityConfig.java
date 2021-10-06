@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/public/**", "/login", "/register", "/", "/post/**").permitAll()
+                .antMatchers("/public/**", "/login", "/register", "/", "/post/**", "/logout").permitAll()
                 .antMatchers("/private/**", "/create-post", "/edit-post", "/edit-comment", "/admin-panel", "/**").authenticated()
                 .anyRequest()
                 .authenticated()
@@ -39,7 +40,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/", true)
-                .failureUrl("/login?error");
+                .failureUrl("/login?error")
+                .and()
+                //logout
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .logoutSuccessHandler(logoutSuccessHandler())
+                .logoutSuccessUrl("/");
     }
 
     @Override
@@ -48,7 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 PathRequest.toStaticResources().atCommonLocations());
     }
 
-    //TODO register encode password?
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
@@ -59,5 +67,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public LogoutSuccessHandler logoutSuccessHandler() {
+        return new CustomLogoutSuccessHandler();
     }
 }
