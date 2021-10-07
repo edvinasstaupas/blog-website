@@ -64,11 +64,7 @@ public class CommentService implements IModelService<Comment> {
             diff = TimeUnit.MILLISECONDS.toDays(diffInMillis) / 365;
             timeUnit = "year";
         }
-        return messageService.commentTimeFormatter(diff, timeUnit, isOne(diff));
-    }
-
-    private boolean isOne(long diff) {
-        return diff == 1;
+        return messageService.commentTimeFormatter(diff, timeUnit);
     }
 
     @Override
