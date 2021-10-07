@@ -43,30 +43,6 @@ public class CommentService implements IModelService<Comment> {
         post.getCommentList().forEach(this::delete);
     }
 
-    public String getTimeFromNow(Comment comment) {
-        long diffInMillis = new Date().getTime() - comment.getPostDate().getTime();
-        long diffInMinutes = diffInMillis / 60000;
-        long diff;
-        String timeUnit;
-        if (diffInMinutes < 60) { //smaller than one hours
-            diff = TimeUnit.MILLISECONDS.toMinutes(diffInMillis);
-            timeUnit = "minute";
-        } else if (diffInMinutes >= 60 && diffInMinutes < 1440) { //more than one hour
-            diff = TimeUnit.MILLISECONDS.toHours(diffInMillis);
-            timeUnit = "hour";
-        } else if (diffInMinutes >= 1400 && diffInMinutes < 43829) { //more than one day
-            diff = TimeUnit.MILLISECONDS.toDays(diffInMillis);
-            timeUnit = "day";
-        } else if (diffInMinutes >= 43829 && diffInMinutes < 525948) { //more than one month
-            diff = TimeUnit.MILLISECONDS.toDays(diffInMillis) / 30;
-            timeUnit = "month";
-        } else { //more than one year
-            diff = TimeUnit.MILLISECONDS.toDays(diffInMillis) / 365;
-            timeUnit = "year";
-        }
-        return messageService.commentTimeFormatter(diff, timeUnit);
-    }
-
     @Override
     public void save(Comment comment) {
         comment.setPostDate(new Date());
