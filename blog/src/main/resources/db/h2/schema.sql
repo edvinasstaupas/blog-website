@@ -1,3 +1,4 @@
+/*
 create table roles
 (
     id   bigint not null
@@ -19,6 +20,7 @@ create table users
         constraint uk_r43af9ap4edm43mmtq01oddj6
             unique
 );
+
 
 create table users_roles
 (
@@ -58,3 +60,4 @@ create table comment
         constraint post_comment_fkey
             references post
 );
+*/
