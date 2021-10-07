@@ -5,8 +5,9 @@ import lt.staupasedvinas.blog.exceptions.entity_error_exceptions.CommentErrorExc
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserException;
 import lt.staupasedvinas.blog.model.*;
-import lt.staupasedvinas.blog.service.post.PostService;
-import lt.staupasedvinas.blog.service.user.UserService;
+import lt.staupasedvinas.blog.service.entity_services.CommentService;
+import lt.staupasedvinas.blog.service.entity_services.post.PostService;
+import lt.staupasedvinas.blog.service.entity_services.user.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;

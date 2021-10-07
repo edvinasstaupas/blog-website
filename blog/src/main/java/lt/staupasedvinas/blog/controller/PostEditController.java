@@ -5,7 +5,7 @@ import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.DTO.PostEditDTO;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Post;
-import lt.staupasedvinas.blog.service.post.PostService;
+import lt.staupasedvinas.blog.service.entity_services.post.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

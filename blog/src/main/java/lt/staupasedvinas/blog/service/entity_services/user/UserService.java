@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.service.user;
+package lt.staupasedvinas.blog.service.entity_services.user;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.authentication_exceptions.EmailNotFoundException;

@@ -1,7 +1,7 @@
 package lt.staupasedvinas.blog.model;
 
 import lombok.*;
-import lt.staupasedvinas.blog.service.user.RoleFactory;
+import lt.staupasedvinas.blog.service.entity_services.user.RoleFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

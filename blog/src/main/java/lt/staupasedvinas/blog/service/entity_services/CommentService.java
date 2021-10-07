@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.service;
+package lt.staupasedvinas.blog.service.entity_services;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.entity_error_exceptions.CommentErrorException;
@@ -7,11 +7,11 @@ import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.repository.CommentRepository;
+import lt.staupasedvinas.blog.service.IModelService;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor

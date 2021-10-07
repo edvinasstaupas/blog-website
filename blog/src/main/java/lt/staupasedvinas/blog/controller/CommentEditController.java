@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.DTO.CommentEditDTO;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.model.Comment;
-import lt.staupasedvinas.blog.service.CommentService;
+import lt.staupasedvinas.blog.service.entity_services.CommentService;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchCommentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

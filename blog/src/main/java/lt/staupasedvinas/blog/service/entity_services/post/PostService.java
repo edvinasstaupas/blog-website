@@ -1,10 +1,10 @@
-package lt.staupasedvinas.blog.service.post;
+package lt.staupasedvinas.blog.service.entity_services.post;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
-import lt.staupasedvinas.blog.service.CommentService;
+import lt.staupasedvinas.blog.service.entity_services.CommentService;
 import lt.staupasedvinas.blog.service.IModelService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
