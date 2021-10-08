@@ -15,7 +15,6 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 @Table(name = "roles")
-//TODO maybe change table name later
 public class Role implements GrantedAuthority {
 
     @Id

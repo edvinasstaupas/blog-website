@@ -8,6 +8,7 @@ import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserExcepti
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.service.ModelService;
 import lt.staupasedvinas.blog.service.entity_services.CommentService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,7 +32,8 @@ public class PostController {
                 model, httpServletRequest, postId);
     }
 
-    //TODO aa
+    //TODO this is stupid but i have no other way to do it for now
+    @PreAuthorize("hasRole('MEMBER')")
     @PostMapping("/post")
     public String createCommentForward(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest, EditOrDeleteObj editOrDeleteObj, RedirectAttributes redirectAttributes) {
         if (comment.getText() == null) {
