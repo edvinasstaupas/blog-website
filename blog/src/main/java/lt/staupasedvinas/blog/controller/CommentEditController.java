@@ -6,6 +6,7 @@ import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchCommentException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.service.entity_services.CommentService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +20,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/edit-comment")
+@PreAuthorize("hasRole('MEMBER')")
 public class CommentEditController {
 
     private Comment classComment;

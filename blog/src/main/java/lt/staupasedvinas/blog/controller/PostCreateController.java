@@ -2,10 +2,10 @@ package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.model.Post;
-import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.service.ModelService;
 import lt.staupasedvinas.blog.service.entity_services.post.PostCreateService;
 import lt.staupasedvinas.blog.service.entity_services.user.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +17,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('MEMBER')")
 public class PostCreateController {
 
     private final PostCreateService postCreateService;
@@ -40,16 +41,10 @@ public class PostCreateController {
     @PostMapping("/create-post-forward")
     public String createPost(Model model, @Valid Post post, BindingResult result, HttpServletRequest request) {
         if (result.hasErrors()) {
-            //model.addAttribute("errorList", result.getAllErrors());
             model.addAttribute("newPost", post);
             return "post/create-post";
         }
-        //TODO do something with that try catch
-        User user = userService.getUserFromHttpServletRequest(request);
-        if (user == null) {
-            return "redirect:";
-        }
-        postCreateService.create(post, user);
+        postCreateService.create(post, userService.getUserFromHttpServletRequest(request));
         return "redirect:/post?postId=" + post.getId();
     }
 }

@@ -25,14 +25,13 @@ public class PostController {
 
     private final ModelService modelService;
 
-    private final CommentService commentService;
-
     @GetMapping("/post")
     public String readPost(@RequestParam Long postId, Model model, HttpServletRequest httpServletRequest) {
         return getModelAfterExceptions(
                 model, httpServletRequest, postId);
     }
 
+    //TODO aa
     @PostMapping("/post")
     public String createCommentForward(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest, EditOrDeleteObj editOrDeleteObj, RedirectAttributes redirectAttributes) {
         if (comment.getText() == null) {

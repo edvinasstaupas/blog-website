@@ -6,6 +6,7 @@ import lt.staupasedvinas.blog.DTO.PostEditDTO;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.service.entity_services.post.PostService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('MEMBER')")
 @RequestMapping("/edit-post")
 public class PostEditController {
 

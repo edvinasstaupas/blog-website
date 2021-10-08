@@ -24,24 +24,10 @@
     </div>
 </div>
 
-<div th:fragment="rememberMe">
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" class="ml-1" value="remember-me" th:field="*{rememberMe}"
-                   th:text="#{login.rememberMe}">
-        </label>
-    </div>
-</div>
-
-<div th:fragment="bottomForm(message)">
-    <div th:replace="fragments/login-register-fragments :: errorMessage(msg=${message})"></div>
+<div th:fragment="bottomForm">
     <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
     <hr class="my-4">
     <small class="btn text-muted" th:text="#{login.bottomText}"></small>
-</div>
-
-<div th:fragment="errorMessage(msg)">
-    <small class="btn text-muted" th:text="${msg}"></small>
 </div>
 
 </html>

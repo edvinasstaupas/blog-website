@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin-panel")
 public class AdminPanelController {
 
@@ -23,7 +24,6 @@ public class AdminPanelController {
 
     private final ModelService modelService;
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public String getAdminPanelView(Model model, HttpServletRequest httpServletRequest) {
         modelService.updateHeadModel(model, httpServletRequest);

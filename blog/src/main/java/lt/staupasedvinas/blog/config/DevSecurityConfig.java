@@ -19,9 +19,9 @@ public class DevSecurityConfig extends SecurityConfig {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring()
-                .antMatchers("/resources/**")
-                .requestMatchers(PathRequest.toH2Console());
+        web.ignoring().requestMatchers(
+                PathRequest.toStaticResources().atCommonLocations(),
+                PathRequest.toH2Console());
     }
 }
 

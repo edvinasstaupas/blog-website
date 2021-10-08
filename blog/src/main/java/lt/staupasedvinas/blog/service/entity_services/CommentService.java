@@ -19,8 +19,6 @@ public class CommentService implements IModelService<Comment> {
 
     private final CommentRepository commentRepository;
 
-    private final MessageService messageService;
-
     public void create(Comment comment, BindingResult result, User user, Post post) throws CommentErrorException {
         if (result.hasErrors()) {
             throw new CommentErrorException();

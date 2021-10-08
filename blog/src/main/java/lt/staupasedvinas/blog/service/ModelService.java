@@ -65,14 +65,5 @@ public class ModelService {
         model.addAttribute("postSearch", new PostSearch());
         model.addAttribute("loggedUser", userService.getUserFromHttpServletRequest(httpServletRequest));
         model.addAttribute("lang", localeResolver.resolveLocale(httpServletRequest).getLanguage());
-        /*if (httpServletRequest.getSession().getAttribute("noSearchError") == null
-                || (Boolean) httpServletRequest.getSession().getAttribute("noSearchError")) {
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder"));
-        } else {
-            //TODO if ever want to implement search, change message
-            //TODO if not remove PostRepository method findByIdAndText and HomeController POST methods
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder-error"));
-            httpServletRequest.getSession().setAttribute("noSearchError", Boolean.TRUE);
-        }*/
     }
 }
