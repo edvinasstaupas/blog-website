@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
+@PreAuthorize("hasRole('USER')")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('MEMBER')")
 public class PostCreateController {
 
     private final PostCreateService postCreateService;

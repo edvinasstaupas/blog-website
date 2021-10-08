@@ -19,7 +19,7 @@ import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('MEMBER')")
+@PreAuthorize("hasRole('USER')")
 @RequestMapping("/edit-post")
 public class PostEditController {
 

@@ -3,14 +3,14 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <div class="w-100" th:fragment="post">
-    <div class="container pb-5">
+    <div class="container pb-5" th:with="auth=${#authentication.getName()}">
         <div class="row align-items-center">
             <div class="col-10 pt-2 pb-4">
                 <h1 th:text="${post.title}"></h1>
             </div>
-            <div class="col-2">
+            <div class="col-2" th:if="${@postService.canEditOrDeletePost(auth, post)}">
                 <form method="POST" th:object="${editOrDeleteObj}">
-                    <div class="comment-options">
+                    <div class="post-options">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button"
                                     id="dropdownPostButton"
@@ -61,7 +61,7 @@
                                 <h4 th:text="${comment.text}"></h4>
                                 <h5 th:text="${comment.author.username} + ' ' + ${@dateMessageService.formatCommentDateMessage(comment)}"></h5>
                             </div>
-                            <div class="col-2">
+                            <div class="col-2" th:if="${@postService.canEditOrDeleteComment(auth, comment)}">
                                 <form method="POST" th:object="${editOrDeleteObj}">
                                     <div class="comment-options">
                                         <div class="dropdown">

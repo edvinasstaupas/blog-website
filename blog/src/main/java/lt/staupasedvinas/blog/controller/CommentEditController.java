@@ -20,7 +20,7 @@ import java.util.Map;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/edit-comment")
-@PreAuthorize("hasRole('MEMBER')")
+@PreAuthorize("hasRole('USER')")
 public class CommentEditController {
 
     private Comment classComment;

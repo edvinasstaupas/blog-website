@@ -33,7 +33,7 @@ public class PostController {
     }
 
     //TODO this is stupid but i have no other way to do it for now
-    @PreAuthorize("hasRole('MEMBER')")
+    @PreAuthorize("hasRole('USER')")
     @PostMapping("/post")
     public String createCommentForward(@RequestParam Long postId, Model model, @Valid Comment comment, BindingResult result, HttpServletRequest httpServletRequest, EditOrDeleteObj editOrDeleteObj, RedirectAttributes redirectAttributes) {
         if (comment.getText() == null) {
