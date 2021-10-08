@@ -4,7 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
 import lt.staupasedvinas.blog.service.ModelService;
-import lt.staupasedvinas.blog.service.UserService;
+import lt.staupasedvinas.blog.service.entity_services.user.UserService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 @RequestMapping("/admin-panel")
 public class AdminPanelController {
 
@@ -25,9 +27,6 @@ public class AdminPanelController {
     @GetMapping
     public String getAdminPanelView(Model model, HttpServletRequest httpServletRequest) {
         modelService.updateHeadModel(model, httpServletRequest);
-        if (model.getAttribute("loggedUser") == null) {
-            return "redirect:/";
-        }
         model.addAttribute("users", userService.findAllSorted());
         EditOrDeleteObj editOrDeleteObj = new EditOrDeleteObj();
         editOrDeleteObj.setObj("user");
@@ -41,13 +40,13 @@ public class AdminPanelController {
             try {
                 userService.makeAdmin(editOrDeleteObj.getObjId());
             } catch (NoSuchUserException e) {
-                return "error";
+                return "/error/4xx";
             }
         } else if (editOrDeleteObj.getAction().equals("removeAdmin")) {
             try {
                 userService.removeAdmin(editOrDeleteObj.getObjId());
             } catch (NoSuchUserException e) {
-                return "error";
+                return "/error/4xx";
             }
         }
         return "redirect:/admin-panel";

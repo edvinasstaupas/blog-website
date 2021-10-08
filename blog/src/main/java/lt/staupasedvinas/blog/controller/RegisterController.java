@@ -1,26 +1,26 @@
 package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import lt.staupasedvinas.blog.model.User;
-import lt.staupasedvinas.blog.model.UserType;
-import lt.staupasedvinas.blog.repository.UserRepository;
-import lt.staupasedvinas.blog.service.MessageService;
+import lt.staupasedvinas.blog.service.entity_services.user.RoleFactory;
+import lt.staupasedvinas.blog.service.entity_services.user.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class RegisterController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
-    private final MessageService messageService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/register")
     public String registerView(Model model) {
@@ -34,24 +34,16 @@ public class RegisterController {
     }
 
     @PostMapping("/registerForward")
-    public String registerForward(Model model, User user, HttpServletRequest httpServletRequest) {
-        User dbUser1 = userRepository.getByEmail(user.getEmail());
-        User dbUser2 = userRepository.getByUsername(user.getUsername());
-        if (dbUser1 != null) {
-            model.addAttribute("msg", messageService.getMessage("user-with-email-exists"));
-            model.addAttribute("register", user);
-            log.info("User tried to register with already used email.");
-            return "log-reg/register";
-        } else if (dbUser2 != null) {
-            model.addAttribute("msg", messageService.getMessage("user-with-username-exists"));
-            model.addAttribute("register", user);
-            log.info("User tried to register with already used username.");
-            return "log-reg/register";
+    public String registerForward(Model model, @Valid User user, BindingResult bindingResult, HttpServletRequest httpServletRequest) {
+        var dbUser1 = userService.getByEmailNoException(user.getEmail());
+        var dbUser2 = userService.getByUsernameNoException(user.getUsername());
+        if (bindingResult.hasErrors() || dbUser1 != null || dbUser2 != null) {
+            return "redirect:/register?error";
         } else {
-            user.setUserType(new UserType(1L, "member"));
-            userRepository.save(user);
-            httpServletRequest.getSession().setAttribute("user", user);
-            return "redirect:";
+            userService.encodePassword(user, passwordEncoder);
+            userService.addRole(user, RoleFactory.getUserRole());
+            userService.save(user);
+            return "redirect:/login";
         }
     }
 }

@@ -4,20 +4,13 @@
     <title>Post</title>
 </head>
 <body>
-<!--TODO change this to fragment-->
 <div class="page">
-    <div th:replace="fragments/home-fragments :: pageHead(language=${lang}, user=${loggedUser})"></div>
+    <div th:replace="fragments/home-fragments :: pageHead(language=${lang})"></div>
     <div class="mainContainer">
         <div class="banner"></div>
         <div class="right-side banner"></div>
         <div class="main">
-            <div class="container pt-4 px-3 px-lg-3 m-2">
-                <div class="row gx-4 gx-lg-5 justify-content-center">
-                    <div class="col-12">
-                        <div th:replace="fragments/post-fragments :: post"></div>
-                    </div>
-                </div>
-            </div>
+            <div th:replace="fragments/post-fragments :: post"></div>
         </div>
         <div class="left-side banner"></div>
     </div>

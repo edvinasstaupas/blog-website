@@ -1,11 +1,16 @@
 package lt.staupasedvinas.blog.service;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.entity_error_exception.CommentErrorException;
+import lt.staupasedvinas.blog.exceptions.entity_error_exceptions.CommentErrorException;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoUserException;
-import lt.staupasedvinas.blog.model.*;
-import lt.staupasedvinas.blog.service.post.PostService;
+import lt.staupasedvinas.blog.model.Comment;
+import lt.staupasedvinas.blog.model.Post;
+import lt.staupasedvinas.blog.model.PostSearch;
+import lt.staupasedvinas.blog.model.User;
+import lt.staupasedvinas.blog.service.entity_services.CommentService;
+import lt.staupasedvinas.blog.service.entity_services.post.PostService;
+import lt.staupasedvinas.blog.service.entity_services.user.UserService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -24,14 +29,11 @@ public class ModelService {
 
     private final LocaleResolver localeResolver;
 
-    private final MessageService messageService;
-
     private final CommentService commentService;
 
     public void updateHomeModel(Model model, HttpServletRequest httpServletRequest, Pageable page) {
         updateBaseModel(model, httpServletRequest);
         model.addAttribute("posts", postService.findAllPaginated(page));
-        //model.addAttribute("posts", postService.findAll());
     }
 
     public void updatePostModel(Model model, HttpServletRequest httpServletRequest, Long postId, Comment comment, BindingResult result) throws NoSuchPostException, NoUserException, CommentErrorException {
@@ -55,22 +57,13 @@ public class ModelService {
         model.addAttribute("editComment", new Comment());
     }
 
+    public void updateHeadModel(Model model, HttpServletRequest httpServletRequest) {
+        updateBaseModel(model, httpServletRequest);
+    }
+
     private void updateBaseModel(Model model, HttpServletRequest httpServletRequest) {
         model.addAttribute("postSearch", new PostSearch());
         model.addAttribute("loggedUser", userService.getUserFromHttpServletRequest(httpServletRequest));
         model.addAttribute("lang", localeResolver.resolveLocale(httpServletRequest).getLanguage());
-        if (httpServletRequest.getSession().getAttribute("noSearchError") == null
-                || (Boolean) httpServletRequest.getSession().getAttribute("noSearchError")) {
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder"));
-        } else {
-            //TODO if ever want to implement search, change message
-            //TODO if not remove PostRepository method findByIdAndText and HomeController POST methods
-            model.addAttribute("searchPlaceholder", messageService.getMessage("home.search-placeholder-error"));
-            httpServletRequest.getSession().setAttribute("noSearchError", Boolean.TRUE);
-        }
-    }
-
-    public void updateHeadModel(Model model, HttpServletRequest httpServletRequest) {
-        updateBaseModel(model, httpServletRequest);
     }
 }

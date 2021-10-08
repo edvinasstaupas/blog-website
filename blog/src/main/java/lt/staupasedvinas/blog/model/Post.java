@@ -5,7 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Builder
 @Getter
@@ -28,8 +30,7 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "author_id",
-            foreignKey = @ForeignKey(name = "user_post_author_fkey")
-    )
+            foreignKey = @ForeignKey(name = "user_post_author_fkey"))
     private User author;
 
     @Column(name = "post_date", columnDefinition = "timestamp")

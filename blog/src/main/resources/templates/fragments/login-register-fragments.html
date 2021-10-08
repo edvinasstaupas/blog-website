@@ -3,46 +3,31 @@
 
 <div th:fragment="usernameInput">
     <div class="mb-3 form-floating w-100" id="username">
-        <input type="text" class="form-control" id="floatingUsername"
-               th:field="*{username}" required >
+        <input name="username" type="text" class="form-control" id="floatingUsername" required>
         <label for="floatingUsername" th:text="#{login.username}"></label>
     </div>
 </div>
 
 <div th:fragment="email">
     <div class="mb-3 form-floating w-100" id="email">
-        <input type="email" class="form-control" id="floatingEmail"
-               th:field="*{email}" required autofocus>
+        <input name="email" class="form-control" id="floatingEmail"
+               required autofocus>
         <label for="floatingEmail" th:text="#{login.email}"></label>
     </div>
 </div>
 
 <div th:fragment="password">
     <div class="form-floating mb-3 w-100" id="password">
-        <input type="password" class="form-control" id="floatingPassword"
-               th:field="*{password}" required>
+        <input name="password" type="password" class="form-control" id="floatingPassword"
+               required>
         <label for="floatingPassword" th:text="#{login.password}"></label>
     </div>
 </div>
 
-<div th:fragment="rememberMe">
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" class="ml-1" value="remember-me" th:field="*{rememberMe}"
-                   th:text="#{login.rememberMe}">
-        </label>
-    </div>
-</div>
-
-<div th:fragment="bottomForm(message)">
-    <div th:replace="fragments/login-register-fragments :: errorMessage(msg=${message})"></div>
+<div th:fragment="bottomForm">
     <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
     <hr class="my-4">
     <small class="btn text-muted" th:text="#{login.bottomText}"></small>
-</div>
-
-<div th:fragment="errorMessage(msg)">
-    <small class="btn text-muted" th:text="${msg}"></small>
 </div>
 
 </html>
