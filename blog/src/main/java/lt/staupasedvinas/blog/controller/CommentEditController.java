@@ -34,7 +34,7 @@ public class CommentEditController {
         try {
             classComment = commentService.findById(editOrDeleteObj.getObjId());
         } catch (NoSuchCommentException e) {
-            return "error";
+            return "/error/4xx";
         }
         if (editOrDeleteObj.getAction().equals("edit")) {
             model.addAttribute("comment", classComment);

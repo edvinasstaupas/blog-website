@@ -40,13 +40,13 @@ public class AdminPanelController {
             try {
                 userService.makeAdmin(editOrDeleteObj.getObjId());
             } catch (NoSuchUserException e) {
-                return "error";
+                return "/error/4xx";
             }
         } else if (editOrDeleteObj.getAction().equals("removeAdmin")) {
             try {
                 userService.removeAdmin(editOrDeleteObj.getObjId());
             } catch (NoSuchUserException e) {
-                return "error";
+                return "/error/4xx";
             }
         }
         return "redirect:/admin-panel";

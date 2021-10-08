@@ -6,7 +6,6 @@ import lt.staupasedvinas.blog.DTO.PostEditDTO;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.service.entity_services.post.PostService;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +34,7 @@ public class PostEditController {
         try {
             classPost = postService.findById(editOrDeleteObj.getObjId());
         } catch (NoSuchPostException e) {
-            return "error";
+            return "/error/4xx";
         }
         if (editOrDeleteObj.getAction().equals("edit")) {
             model.addAttribute("post", classPost);

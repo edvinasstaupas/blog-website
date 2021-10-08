@@ -58,11 +58,11 @@ public class PostController {
         try {
             modelService.updatePostModel(model, httpServletRequest, postId, comment, result);
         } catch (NoSuchPostException e) {
-            return "error";
+            return "/error/4xx";
         } catch (CommentErrorException e) {
-            return "error";
+            return "redirect:/error";
         } catch (NoUserException e) {
-            return "error";
+            return "redirect:/error";
         }
         return returnString;
     }
@@ -71,7 +71,7 @@ public class PostController {
         try {
             modelService.updatePostModel(model, httpServletRequest, postId);
         } catch (NoSuchPostException e) {
-            return "error";
+            return "/error/4xx";
         }
         return "post/post";
     }
