@@ -1,12 +1,12 @@
-package lt.staupasedvinas.blog.service.entity_services.user;
+package lt.staupasedvinas.blog.service.entity.user;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.authentication_exceptions.EmailNotFoundException;
-import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
+import lt.staupasedvinas.blog.exceptions.authentication.EmailNotFoundException;
+import lt.staupasedvinas.blog.exceptions.entity.nosuch.NoSuchUserException;
 import lt.staupasedvinas.blog.model.Role;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.repository.UserRepository;
-import lt.staupasedvinas.blog.service.IModelService;
+import lt.staupasedvinas.blog.service.entity.IEntityService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements IModelService<User>, UserDetailsService {
+public class UserService implements IEntityService<User>, UserDetailsService {
 
     private final UserRepository userRepository;
 

@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions;
+package lt.staupasedvinas.blog.exceptions.entity.nosuch;
 
 public class NoSuchCommentException extends NoSuchEntityException {
     public NoSuchCommentException(Long id) {

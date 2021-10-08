@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 @Configuration
-@Profile("!dev")
+@Profile("prod")
 public class ProdSecurityConfig extends SecurityConfig {
     public ProdSecurityConfig(UserDetailsService userDetailsService, PasswordEncoder passwordEncoder, LogoutSuccessHandler logoutSuccessHandler) {
         super(userDetailsService, passwordEncoder, logoutSuccessHandler);

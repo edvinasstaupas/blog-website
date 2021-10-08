@@ -1,15 +1,15 @@
-package lt.staupasedvinas.blog.service.entity_services.post;
+package lt.staupasedvinas.blog.service.entity.post;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
+import lt.staupasedvinas.blog.exceptions.entity.nosuch.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.repository.PostRepository;
-import lt.staupasedvinas.blog.service.IModelService;
-import lt.staupasedvinas.blog.service.entity_services.CommentService;
-import lt.staupasedvinas.blog.service.entity_services.user.RoleFactory;
-import lt.staupasedvinas.blog.service.entity_services.user.UserService;
+import lt.staupasedvinas.blog.service.entity.IEntityService;
+import lt.staupasedvinas.blog.service.entity.CommentService;
+import lt.staupasedvinas.blog.service.entity.user.RoleFactory;
+import lt.staupasedvinas.blog.service.entity.user.UserService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class PostService implements IModelService<Post> {
+public class PostService implements IEntityService<Post> {
 
     private final PostRepository postRepository;
 

@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.service.entity_services;
+package lt.staupasedvinas.blog.service.entity;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

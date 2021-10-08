@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.service.entity_services.user;
+package lt.staupasedvinas.blog.service.entity.user;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.repository.RoleRepository;

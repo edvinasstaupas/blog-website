@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.service.entity_services.post;
+package lt.staupasedvinas.blog.service.entity.post;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.model.Post;

@@ -1,13 +1,12 @@
-package lt.staupasedvinas.blog.service.entity_services;
+package lt.staupasedvinas.blog.service.entity;
 
 import lombok.RequiredArgsConstructor;
-import lt.staupasedvinas.blog.exceptions.entity_error_exceptions.CommentErrorException;
-import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchCommentException;
+import lt.staupasedvinas.blog.exceptions.entity.error.CommentErrorException;
+import lt.staupasedvinas.blog.exceptions.entity.nosuch.NoSuchCommentException;
 import lt.staupasedvinas.blog.model.Comment;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.model.User;
 import lt.staupasedvinas.blog.repository.CommentRepository;
-import lt.staupasedvinas.blog.service.IModelService;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
@@ -15,7 +14,7 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class CommentService implements IModelService<Comment> {
+public class CommentService implements IEntityService<Comment> {
 
     private final CommentRepository commentRepository;
 

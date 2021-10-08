@@ -2,8 +2,8 @@ package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.model.User;
-import lt.staupasedvinas.blog.service.entity_services.user.RoleFactory;
-import lt.staupasedvinas.blog.service.entity_services.user.UserService;
+import lt.staupasedvinas.blog.service.entity.user.RoleFactory;
+import lt.staupasedvinas.blog.service.entity.user.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.service.entity_services.user;
+package lt.staupasedvinas.blog.service.entity.user;
 
 import lt.staupasedvinas.blog.model.Role;
 

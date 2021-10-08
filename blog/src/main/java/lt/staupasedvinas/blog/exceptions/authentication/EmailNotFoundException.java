@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.exceptions.authentication_exceptions;
+package lt.staupasedvinas.blog.exceptions.authentication;
 
 import org.springframework.security.core.AuthenticationException;
 

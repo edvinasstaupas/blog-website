@@ -1,4 +1,4 @@
-package lt.staupasedvinas.blog.exceptions.entity_error_exceptions;
+package lt.staupasedvinas.blog.exceptions.entity.error;
 
 public class CommentErrorException extends EntityErrorException {
     public CommentErrorException() {

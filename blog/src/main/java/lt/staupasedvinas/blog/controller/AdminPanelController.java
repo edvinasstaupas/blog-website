@@ -2,9 +2,9 @@ package lt.staupasedvinas.blog.controller;
 
 import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.DTO.EditOrDeleteObj;
-import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchUserException;
+import lt.staupasedvinas.blog.exceptions.entity.nosuch.NoSuchUserException;
 import lt.staupasedvinas.blog.service.ModelService;
-import lt.staupasedvinas.blog.service.entity_services.user.UserService;
+import lt.staupasedvinas.blog.service.entity.user.UserService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
