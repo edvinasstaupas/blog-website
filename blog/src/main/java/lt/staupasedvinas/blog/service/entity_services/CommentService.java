@@ -57,7 +57,6 @@ public class CommentService implements IModelService<Comment> {
     @Override
     public Comment findById(Long id) throws NoSuchCommentException {
         Optional<Comment> optionalComment = commentRepository.findById(id);
-        ;
         if (optionalComment.isPresent())
             return optionalComment.get();
         throw new NoSuchCommentException(id);

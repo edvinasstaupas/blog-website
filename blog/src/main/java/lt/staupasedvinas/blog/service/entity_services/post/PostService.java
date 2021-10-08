@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import lt.staupasedvinas.blog.exceptions.no_such_entity_exceptions.NoSuchPostException;
 import lt.staupasedvinas.blog.model.Post;
 import lt.staupasedvinas.blog.repository.PostRepository;
-import lt.staupasedvinas.blog.service.entity_services.CommentService;
 import lt.staupasedvinas.blog.service.IModelService;
+import lt.staupasedvinas.blog.service.entity_services.CommentService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,7 +34,7 @@ public class PostService implements IModelService<Post> {
 
     @Override
     public Post findById(Long id) throws NoSuchPostException {
-        Optional<Post> postOptional = postRepository.findById(id);;
+        Optional<Post> postOptional = postRepository.findById(id);
         if (postOptional.isPresent()) {
             return postOptional.get();
         } else {
