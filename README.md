@@ -6,9 +6,12 @@ First of all, clone the repository:
 
 `git clone https://github.com/edvinasstaupas/SPRING-blog-website.git`
 
-Then generate gradle wrapper jar in project directory
+Then run program:
 
-`gradlew bootRun`
+In Linux/MacOs/Git Bash:
+`./gradlew bootRun`
+In Windows PowerShell:
+`.\gradlew bootRun`
 
 And now you have a working blog website
 
@@ -17,7 +20,10 @@ If you'd like to use PostgreSQL database, first you will need to create database
 
 After initializing database, use 
 
-`gradlew bootRun --args='--spring.profiles.active=prod'`
+In Linux/MacOs/Git Bash:
+`./gradlew bootRun --args='--spring.profiles.active=prod'`
+In Windows PowerShell:
+`.\gradlew bootRun --args='--spring.profiles.active=prod'`
 
 These commands can be avoided by using IntelliJ IDE. 
 
