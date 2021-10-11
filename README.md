@@ -66,4 +66,3 @@ If you'd like to use profiles, change run configuration Active profiles section 
 #### This project is my main source of Spring learning.
 
 #### Here I am using most of my knowledge regarding web development with Spring.
-
