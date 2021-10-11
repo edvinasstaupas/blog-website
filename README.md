@@ -6,7 +6,7 @@ First of all, clone the repository:
 
 `git clone https://github.com/edvinasstaupas/SPRING-blog-website.git`
 
-Then run program:
+Then run program from `/blog` directory:
 
 In Linux/MacOs/Git Bash:
 
