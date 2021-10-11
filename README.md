@@ -54,8 +54,6 @@ If you'd like to use profiles, change run configuration Active profiles section 
 
 ![image](https://user-images.githubusercontent.com/73701414/136576959-9ae55ee7-9e6e-4878-9541-8ef8acd1b8a1.png)
 
-## Check out dev branch to see full history of developing this project
-
 #### This project is my main source of Spring learning.
 
 #### Here I am using most of my knowledge regarding web development with Spring.
