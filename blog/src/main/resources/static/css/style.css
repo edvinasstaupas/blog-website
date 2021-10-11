@@ -1,0 +1,122 @@
+body {
+}
+
+.page {
+    grid-column: 2;
+}
+
+.head {
+    flex-flow: row wrap;
+    overflow-wrap: anywhere;
+    align-items: center;
+}
+
+.head > * {
+    margin: 5px 0;
+}
+
+.header {
+    margin: 0 10px;
+    font-size: 4vh;
+    align-self: center;
+    flex-grow: 10;
+}
+
+.headerRight {
+    margin-left: 2px;
+    justify-self: flex-end;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.headerRight > * {
+    margin: 2px;
+}
+
+#userButtons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#userButtons > * {
+    margin: 2px;
+}
+
+#searchForm {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    justify-self: flex-start;
+}
+
+#left-logo {
+    width: 100%;
+    height: auto;
+}
+
+.mainContainer {
+    width: 100%;
+}
+
+.main {
+    display: flex;
+    align-content: center;
+    flex-flow: column wrap;
+    overflow-wrap: anywhere;
+}
+
+.left-side {
+    grid-area: left;
+}
+
+.right-side {
+    grid-area: right;
+}
+
+.banner {
+    height: inherit;
+}
+
+.left-side.banner {
+    background-color: white;
+}
+
+.right-side.banner {
+    background-color: white;
+}
+
+a {
+    color: rgba(0, 0, 0, 0.8);
+    text-decoration: none;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    color: rgba(0, 0, 0, 1);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgba(0, 0, 0, 1);
+    text-decoration: none;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+#postText {
+    font-size: 1.5rem;
+}

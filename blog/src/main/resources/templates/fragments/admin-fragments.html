@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<tr th:fragment="users(user)">
+    <td>
+        <h3 th:text="${user.id}"></h3>
+    </td>
+    <td>
+        <h3 th:text="${user.username}"></h3>
+    </td>
+    <td>
+        <h3 th:text="${#lists.size(user.posts)}"></h3>
+    </td>
+    <td>
+        <h3 th:text="${#lists.size(user.comments)}"></h3>
+    </td>
+    <td>
+        <div th:each="r : ${user.roles}">
+            <div th:if="${r.name ne 'USER'}">
+                <h3 th:text="${r.name}"></h3>
+            </div>
+        </div>
+    </td>
+    <td>
+        <form method="post" th:object="${editOrDeleteObj}">
+            <input type="hidden" th:value="${u.id}" th:attr="name='objId'">
+            <div th:unless="${user.hasPrivileges()}">
+                <button type="submit" class="btn btn-danger"
+                        th:value="'makeAdmin'"
+                        th:attr="name='action'">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </div>
+            <div th:if="${user.hasPrivileges()}">
+                <button type="submit" class="btn btn-danger"
+                        th:value="'removeAdmin'"
+                        th:attr="name='action'">
+                    <i class="fas fa-user-minus"></i>
+                </button>
+            </div>
+        </form>
+    </td>
+</tr>
+
+</html>

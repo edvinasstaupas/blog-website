@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:include="fragments/headFragment :: headFragment(title='Home')">
+    <title>Blog</title>
+</head>
+<body>
+<div class="page">
+    <div th:replace="fragments/home-fragment :: page"></div>
+</div>
+<div th:include="fragments/headFragment :: footer"></div>
+</body>
+</html>

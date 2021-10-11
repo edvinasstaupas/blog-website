@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="usernameInput">
+    <div class="mb-3 form-floating w-100" id="username">
+        <input name="username" type="text" class="form-control" id="floatingUsername" required>
+        <label for="floatingUsername" th:text="#{login.username}"></label>
+    </div>
+</div>
+
+<div th:fragment="email">
+    <div class="mb-3 form-floating w-100" id="email">
+        <input name="email" class="form-control" id="floatingEmail"
+               required autofocus>
+        <label for="floatingEmail" th:text="#{login.email}"></label>
+    </div>
+</div>
+
+<div th:fragment="password">
+    <div class="form-floating mb-3 w-100" id="password">
+        <input name="password" type="password" class="form-control" id="floatingPassword"
+               required>
+        <label for="floatingPassword" th:text="#{login.password}"></label>
+    </div>
+</div>
+
+<div th:fragment="bottomForm">
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Submit</button>
+    <hr class="my-4">
+    <small class="btn text-muted" th:text="#{login.bottomText}"></small>
+</div>
+
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/headFragment :: headFragment(title='Log in')">
+</head>
+<body>
+<div class="d-flex justify-content-center align-items-center" style="height: 95vh">
+    <form class="w-30 p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:action="@{/login}">
+        <div th:replace="fragments/login-register-fragments :: usernameInput"></div>
+        <div th:replace="fragments/login-register-fragments :: password"></div>
+        <div class="alert alert-danger" role="alert" th:text="#{login.badInput}" th:if="${param.error ne null}"></div>
+        <div th:replace="fragments/login-register-fragments :: bottomForm"></div>
+    </form>
+</div>
+<div th:include="fragments/headFragment :: footer"></div>
+</body>
+</html>

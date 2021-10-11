@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="pageHead(language)">
+    <div class="head d-flex flex-wrap justify-content-center py-2 px-5 mb-4 border-bottom"
+         style="background-color: lightgray">
+        <div class="logo">
+            <img id="left-logo" th:src="@{/images/logo.png}" alt="logo" onclick="location.href='/'"/>
+        </div>
+        <div class="header" th:text="#{home.header}" onclick="location.href='/'"></div>
+        <div th:replace="fragments/home-fragments :: langButtons"></div>
+        <div class="headerRight">
+            <div sec:authorize="isAnonymous()">
+                <div th:replace="fragments/home-fragments :: logRegButtons"></div>
+            </div>
+            <div class="d-flex justify-content-between" id="userButtons" sec:authorize="isAuthenticated()">
+                <div th:replace="fragments/home-fragments :: createPost"></div>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <div th:replace="fragments/home-fragments :: adminPanelButton"></div>
+                </div>
+                <div>
+                    <a onclick="location.href='/logout'">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="logRegButtons">
+    <button id="login" class="btn btn-dark" th:text="#{home.login}"
+            onclick="location.href = '/login'"></button>
+    <button id="register" class="btn btn-dark" th:text="#{home.register}"
+            onclick="location.href = '/register'"></button>
+</div>
+
+<div th:fragment="adminPanelButton">
+    <button type="button" class="btn btn-dark" onclick="location.href = '/admin-panel'"
+            th:text="#{home.admin-panel}"></button>
+</div>
+
+<div th:fragment="createPost">
+    <button type="button" class="btn btn-dark" onclick="location.href = '/create-post'"
+            th:text="#{home.create-post}"></button>
+</div>
+
+<div th:fragment="langButtons">
+    <div>
+        <button class="btn"
+                onclick="window.location.assign('/?lang=lt')"
+                th:classappend="${language == 'lt' ? 'btn-outline-dark' : 'btn-outline-secondary'}">LT
+        </button>
+        <button class="btn"
+                onclick="window.location.assign('/?lang=en')"
+                th:classappend="${language == 'en' ? 'btn-outline-dark' : 'btn-outline-secondary'}">EN
+        </button>
+    </div>
+</div>
+
+<div th:fragment="content">
+    <div class="col-md-10 col-lg-8 col-xl-7">
+        <div th:replace="fragments/main :: content(post = ${p})"></div>
+    </div>
+</div>
+
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:include="fragments/headFragment :: headFragment(title='Edit comment')">
+</head>
+<body>
+<div class="d-flex justify-content-center align-items-center" style="height: 95vh">
+  <form class="w-75 p-4 p-md-5 border rounded-3 bg-light d-flex flex-column" method="POST" th:object="${editedComment}">
+    <div th:replace="fragments/edit-comment-fragments :: text"></div>
+    <div th:replace="fragments/edit-comment-fragments :: submit"></div>
+  </form>
+</div>
+<div th:include="fragments/headFragment :: footer"></div>
+</body>
+</html>

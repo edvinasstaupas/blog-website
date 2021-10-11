@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="content(post)">
+        <a th:href="'post/?postId=' + ${post.id}">
+            <h2 th:text="${post.title}"></h2>
+        </a>
+    <hr class="my-4">
+</div>
+
+<div th:fragment="paginator(endpoint, pagebaleObj)">
+    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+        <ul class="pagination"
+            th:with="order=${pagebaleObj.sort.iterator().hasNext() ? pagebaleObj.sort.iterator().next() : null},
+					sort=${order.property + ',' + order.direction} + (${order.property} eq 'name' ? ',ignorecase' : '')">
+            <li class="page-item"
+                th:classappend="${!pagebaleObj.hasPrevious()} ? disabled">
+                <a class="page-link"
+                   th:href="@{*{endpoint}(page=${pagebaleObj.number} - 1, sort=${sort})}"
+                   th:text="#{page.previous}"></a>
+            </li>
+            <li class="page-item"
+                th:classappend="${pageNumber eq pagebaleObj.number} ? active"
+                th:each="pageNumber : ${#numbers.sequence(0, pagebaleObj.totalPages - 1)}">
+                <a class="page-link"
+                   th:href="@{*{endpoint}(page=${pageNumber}, sort=${sort})}"
+                   th:text="${pageNumber} + 1"></a>
+            </li>
+
+            <li class="page-item" th:classappend="${!pagebaleObj.hasNext()} ? disabled">
+                <a class="page-link"
+                   th:href="@{*{endpoint}(page=${pagebaleObj.number} + 1, sort=${sort})}"
+                   th:text="#{page.next}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+</html>

@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="fragments/headFragment :: headFragment(title='Error')">
+<body>
+<div class="d-flex flex-column justify-content-center align-items-center" style="height: 95vh">
+        <h1 class="text-center pb-3" th:text="#{error.message}"></h1>
+        <button class="btn btn-lg btn-dark" onclick="location.href = '/'" th:text="#{error.home}"></button>
+    </div>
+</body>
+</html>
