@@ -4,7 +4,7 @@
 
 First of all, clone the repository:
 
-`git clone https://github.com/edvinasstaupas/blog-spring-example-MAIN-PROJECT.git`
+`git clone https://github.com/edvinasstaupas/SPRING-blog-website.git`
 
 Then generate gradle wrapper jar in project directory
 
