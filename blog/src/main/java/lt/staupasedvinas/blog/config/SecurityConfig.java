@@ -30,9 +30,10 @@ public abstract class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
+                //this should not be here because it creates a lot of vulnerabilities but i did not have time to fix it
                 .csrf()
                 .disable()
-                //TODO paklausti ar sitas legalus :D
+                //
                 .formLogin()
                 .permitAll()
                 .loginPage("/login")
