@@ -9,8 +9,11 @@ First of all, clone the repository:
 Then run program:
 
 In Linux/MacOs/Git Bash:
+
 `./gradlew bootRun`
+
 In Windows PowerShell:
+
 `.\gradlew bootRun`
 
 And now you have a working blog website
@@ -21,8 +24,11 @@ If you'd like to use PostgreSQL database, first you will need to create database
 After initializing database, use 
 
 In Linux/MacOs/Git Bash:
+
 `./gradlew bootRun --args='--spring.profiles.active=prod'`
+
 In Windows PowerShell:
+
 `.\gradlew bootRun --args='--spring.profiles.active=prod'`
 
 These commands can be avoided by using IntelliJ IDE. 
