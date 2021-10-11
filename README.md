@@ -24,8 +24,8 @@ In Windows PowerShell:
 
 Now you have a working blog website:sparkler::sparkler:
 
-Now keep in mind that default profile is 'dev' which comes with h2 database
-If you'd like to use not in-memmory database, first you will need to create database and change `application-prod.yaml` properties file (checkout .
+**Keep in mind** that default profile is 'dev' which comes with h2 database
+If you'd like to use other databases, first you will need to create database and change `application-prod.yaml` properties file
 
 After initializing database, use 
 
